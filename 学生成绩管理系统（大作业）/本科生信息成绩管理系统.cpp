@@ -1,58 +1,78 @@
 #include <iostream>
 #include <string>
 #include <ctime>
+#include <fstream>
 #define MAX 10000
 using namespace std;
 /*
-å­¦ç”ŸåŸºæœ¬ä¿¡æ¯ç®¡ç†ç³»ç»Ÿ
-	1.å­¦ç”ŸåŸºæœ¬ä¿¡æ¯è¾“å…¥ 
-	ï¼ˆ1ï¼‰æœ¬ç§‘ç”Ÿè¾“å…¥å§“åï¼Œç­çº§ï¼Œä¸“ä¸šï¼Œæ€§åˆ«ï¼Œè‡ªåŠ¨ç”Ÿæˆå­¦å· 
-	ï¼ˆ2ï¼‰ç ”ç©¶ç”Ÿè¾“å…¥å§“åï¼Œç­çº§ï¼Œä¸“ä¸šï¼Œæ€§åˆ«ï¼Œç ”ç©¶æ–¹å‘ï¼Œå¯¼å¸ˆï¼Œè‡ªåŠ¨ç”Ÿæˆå­¦å· 
+Ñ§Éú»ù±¾ĞÅÏ¢¹ÜÀíÏµÍ³
+	1.Ñ§Éú»ù±¾ĞÅÏ¢ÊäÈë 
+	£¨1£©±¾¿ÆÉúÊäÈëĞÕÃû£¬°à¼¶£¬×¨Òµ£¬ĞÔ±ğ£¬×Ô¶¯Éú³ÉÑ§ºÅ 
+	£¨2£©ÑĞ¾¿ÉúÊäÈëĞÕÃû£¬°à¼¶£¬×¨Òµ£¬ĞÔ±ğ£¬ÑĞ¾¿·½Ïò£¬µ¼Ê¦£¬×Ô¶¯Éú³ÉÑ§ºÅ 
 	
-	2.å­¦ç”ŸåŸºæœ¬ä¿¡æ¯ä¿®æ”¹
-	ï¼ˆ1ï¼‰ä¿®æ”¹é™¤å­¦å·å¤–ä»»æ„åŸºæœ¬èµ„æ–™
+	2.Ñ§Éú»ù±¾ĞÅÏ¢ĞŞ¸Ä
+	£¨1£©ĞŞ¸Ä³ıÑ§ºÅÍâÈÎÒâ»ù±¾×ÊÁÏ
 	
-	3.åˆ é™¤å­¦ç”ŸåŸºæœ¬èµ„æ–™
-	ï¼ˆ1ï¼‰æ ¹æ®å­¦å·åˆ é™¤ä¸€ä¸ªå­¦ç”Ÿ
+	3.É¾³ıÑ§Éú»ù±¾×ÊÁÏ
+	£¨1£©¸ù¾İÑ§ºÅÉ¾³ıÒ»¸öÑ§Éú
 	
-	4.æŸ¥è¯¢å­¦ç”ŸåŸºæœ¬èµ„æ–™
-	ï¼ˆ1ï¼‰æ ¹æ®å­¦å·æŸ¥è¯¢å­¦ç”ŸåŸºæœ¬èµ„æ–™ 
+	4.²éÑ¯Ñ§Éú»ù±¾×ÊÁÏ
+	£¨1£©¸ù¾İÑ§ºÅ²éÑ¯Ñ§Éú»ù±¾×ÊÁÏ 
 	
 	
-æˆç»©ç®¡ç†ç³»ç»Ÿ 
-	1.è¾“å…¥æˆç»©
+³É¼¨¹ÜÀíÏµÍ³ 
+	1.ÊäÈë³É¼¨
 	
-	2.è®¡ç®—æˆç»©
-	(1) æ€»æˆç»©çš„è®¡ç®—
-	(2) æ’åçš„è®¡ç®—(ç­æ’å’Œæ ¡æ’ï¼‰ 
-	(3) æ€»æˆç»©æ’åº(æŒ‰ç­çº§å’Œå­¦æ ¡è¿›è¡Œ) 
+	2.¼ÆËã³É¼¨
+	(1) ×Ü³É¼¨µÄ¼ÆËã
+	(2) ÅÅÃûµÄ¼ÆËã(°àÅÅºÍĞ£ÅÅ£© 
+	(3) ×Ü³É¼¨ÅÅĞò(°´°à¼¶ºÍÑ§Ğ£½øĞĞ) 
 	
-	3.æŸ¥è¯¢æˆç»©
-	(1)æ ¹æ®å­¦å·æŸ¥è¯¢å­¦ç”Ÿä¸ªäººæˆç»©
-	(2)å¯ä»¥(åˆ†é¡µ)æ˜¾ç¤ºå…¨éƒ¨å­¦ç”Ÿæˆç»©
-	(3)å¯ä»¥æŸ¥è¯¢æŸç­çº§ä¸­ä¸åŠæ ¼å­¦ç”Ÿä¿¡æ¯
+	3.²éÑ¯³É¼¨
+	(1)¸ù¾İÑ§ºÅ²éÑ¯Ñ§Éú¸öÈË³É¼¨
+	(2)¿ÉÒÔ(·ÖÒ³)ÏÔÊ¾È«²¿Ñ§Éú³É¼¨
+	(3)¿ÉÒÔ²éÑ¯Ä³°à¼¶ÖĞ²»¼°¸ñÑ§ÉúĞÅÏ¢
 	 
-	4.ä¿®æ”¹æˆç»©
-	(1)æ ¹æ®å­¦ç”Ÿå­¦å·å¯ä»¥å¯¹æŸé—¨è¯¾ç¨‹è¿›è¡Œä¿®æ”¹
-	(2)ä¿®æ”¹å‰æ˜¾ç¤ºè¯¥å­¦ç”Ÿæˆç»©
+	4.ĞŞ¸Ä³É¼¨
+	(1)¸ù¾İÑ§ÉúÑ§ºÅ¿ÉÒÔ¶ÔÄ³ÃÅ¿Î³Ì½øĞĞĞŞ¸Ä
+	(2)ĞŞ¸ÄÇ°ÏÔÊ¾¸ÃÑ§Éú³É¼¨
 	 
-	5.åˆ é™¤æˆç»©
-	(1)æ ¹æ®å­¦ç”Ÿå­¦å·è¿›è¡Œåˆ é™¤ 
+	5.É¾³ı³É¼¨
+	(1)¸ù¾İÑ§ÉúÑ§ºÅ½øĞĞÉ¾³ı 
 	
-	7.é€€å‡ºç³»ç»Ÿ 
+	7.ÍË³öÏµÍ³ 
 */
 struct student_information1
 {
-	string name;
-	int sex;
-	string clas;
-	string specialty;
-	long int student_number;	
+	string name = " ";
+	int sex = 0;
+	string clas = " ";
+	string specialty = " ";
+	long int student_number = 0;	
 };
 
 struct information1
 {
 	student_information1 s_i_1[MAX];
+	int size = 0;
+};
+
+struct student_score
+{
+	string name = " ";
+	string clas = " ";
+	int high_math = 0;
+	int english = 0;
+	int c_language = 0;
+	int sum_score = 0;
+	int class_ranking = 0;
+	int school_ranking = 0;
+	long int student_number = 0;
+};
+
+struct score
+{
+	student_score s_c[MAX];	
 	int size = 0;
 };
 
@@ -63,27 +83,57 @@ int check_information1(information1 *infor1);
 void delect_information1(information1 *infor1);
 void look_information1(information1 *infor1);
 
+void input_score(score *scor,information1 *infor1);
+void cout_ranking(score *scor);
+int check_person(score *scor,information1 *infor1);
+int check_number(score *scor);
+void change_score(score *scor);
+void delect_student(score *scor);
+void putout_score(score *scor);
+void look_score(score *scor);
+void class_management(score *scor,string *arr);
+
+
 int main(){
 	struct information1 infor1;
+	struct score scor;
 	srand((unsigned int)time(NULL));
+	string  arr[100];
+	
+   	ifstream ifs;
+   	ifs.open("C:\\Users\\pqy18770657781\\Desktop\\Ñ§Éú³É¼¨¹ÜÀíÏµÍ³.xls",ios::in);
+   	char temp;
+	while((temp = getline())!=0
+	
+	
+	
 	int select1,select2;
 	
 	while(true)
 	{
-		cout<<"1.æœ¬ç§‘ç”Ÿä¿¡æ¯ç®¡ç†ç³»ç»Ÿ"<<endl;
-		cout<<"2.æœ¬ç§‘ç”Ÿæˆç»©ç®¡ç†ç³»ç»Ÿ"<<endl;
+		cout<<"1.±¾¿ÆÉúĞÅÏ¢¹ÜÀíÏµÍ³"<<endl;
+		cout<<"2.±¾¿ÆÉú³É¼¨¹ÜÀíÏµÍ³"<<endl;
+		cout<<"3.½«ĞÅÏ¢³É¼¨ÊäÈë±í¸ñ"<<endl;
+		cout<<"3.ÍË³öÑ§Éú¹ÜÀíÏµÍ³"<<endl; 
 		cin>>select1;
 		system("cls");
+
 		if(select1 == 1)
 		{
-			cout<<"1.å­¦ç”ŸåŸºæœ¬ä¿¡æ¯è¾“å…¥ "<<endl;
-			cout<<"2.å­¦ç”ŸåŸºæœ¬ä¿¡æ¯ä¿®æ”¹ "<<endl;
-			cout<<"3.åˆ é™¤å­¦ç”ŸåŸºæœ¬èµ„æ–™ "<<endl;
-			cout<<"4.æŸ¥è¯¢å­¦ç”ŸåŸºæœ¬èµ„æ–™ "<<endl;
-			cout<<"5.è¾“å‡ºå­¦ç”ŸåŸºæœ¬èµ„æ–™ "<<endl;
-			cout<<"6.é€€å‡ºä¿¡æ¯ç®¡ç†ç³»ç»Ÿ "<<endl;
+			while(true)
+			{
+			cout<<"1.Ñ§Éú»ù±¾ĞÅÏ¢ÊäÈë "<<endl;
+			cout<<"2.Ñ§Éú»ù±¾ĞÅÏ¢ĞŞ¸Ä "<<endl;
+			cout<<"3.É¾³ıÑ§Éú»ù±¾×ÊÁÏ "<<endl;
+			cout<<"4.²éÑ¯Ñ§Éú»ù±¾×ÊÁÏ "<<endl;
+			cout<<"5.Êä³öÑ§Éú»ù±¾×ÊÁÏ "<<endl;
+			cout<<"6.ÍË³öĞÅÏ¢¹ÜÀíÏµÍ³ "<<endl;
 			cin>>select2;
 			system("cls");
+			if(select2==6)
+			{
+				break;
+			}
 			switch(select2)
 			{
 				case 1:
@@ -101,20 +151,85 @@ int main(){
 				case 5:
 					putout_information1(&infor1);
 					break;
-				case 6:
-					{
-					system("pause");
-					return 0;
-					break;	
-					}
-
 			}
-			
+			}
 		}
-		
+
 		else if(select1 == 2)
 		{
-			
+			while(true)
+		{	
+			cout<<"  1.Ñ§Éú³É¼¨ÊäÈë "<<endl;
+			cout<<"  2.Ñ§Éú³É¼¨¼ÆËã "<<endl;
+			cout<<"  3.Ñ§Éú³É¼¨ĞŞ¸Ä "<<endl;
+			cout<<"  4.Ñ§Éú³É¼¨É¾³ı "<<endl;
+			cout<<"  5.Ñ§Éú³É¼¨²éÑ¯ "<<endl;
+			cout<<"  6.Ñ§Éú³É¼¨Êä³ö "<<endl;
+			cout<<"7.ÍË³ö³É¼¨¹ÜÀíÏµÍ³ "<<endl;
+			cin>>select2;
+			system("cls");
+			if(select2==7)
+			{
+				break;
+			}		
+			switch(select2)
+			{
+				case 1:
+					input_score(&scor,&infor1);
+					break;
+				case 2:
+					class_management(&scor,arr);
+					break;
+				case 3:
+				{
+					change_score(&scor);
+					cout_ranking(&scor);
+					break;
+				}
+				case 4:
+					delect_student(&scor);
+					break;
+				case 5:
+					look_score(&scor);
+					break;
+				case 6:
+					putout_score(&scor);
+					break;								
+			}
+		}
+		}
+		
+		else if(select1==3)
+		{
+			ofstream ofs;
+			ofs.open("C:\\Users\\pqy18770657781\\Desktop\\Ñ§Éú³É¼¨¹ÜÀíÏµÍ³.xls",ios::app);
+			ofs<<"Ñ§ºÅ\t"<<"ĞÕÃû\t"<<"ĞÔ±ğ\t"<<"°à¼¶\t"<<"×¨Òµ\t"<<"¸ßÊı\t"<<"Ó¢Óï\t"<<"CÓïÑÔ\t"<<"×Ü³É¼¨\t"<<"°àÅÅÃû\t"<<"Ğ£ÅÅÃû\n";
+			for(int i=0;i<infor1.size;i++)
+			{
+				ofs<<infor1.s_i_1[i].student_number<<"\t"
+				   <<infor1.s_i_1[i].name<<"\t"
+				   <<(infor1.s_i_1[i].sex==1?"ÄĞ":"Å®")<<"\t"
+				   <<infor1.s_i_1[i].clas<<"\t"
+				   <<infor1.s_i_1[i].specialty<<"\t"
+				   <<scor.s_c[i].high_math<<"\t"
+				  <<scor.s_c[i].english<<"\t"
+				  <<scor.s_c[i].c_language<<"\t"
+				  <<scor.s_c[i].sum_score<<"\t"
+				  <<scor.s_c[i].class_ranking<<"\t"
+				  <<scor.s_c[i].school_ranking<<"\t"
+				  <<endl;
+			}
+			ofs.close();
+			cout<<"ÊäÈë³É¹¦£¡"<<endl;
+			system("pause");
+			system("cls");
+		}
+		
+		
+		else if(select1==4)
+		{
+			system("pause");
+			return 0;
 		}
 	}
 
@@ -122,24 +237,24 @@ int main(){
 
 void input_information1(information1 *infor1)
 {
-	cout<<"è¯·è¾“å…¥å§“å:"<<endl;
+	cout<<"ÇëÊäÈëĞÕÃû:"<<endl;
 	string name;
 	cin>>name;
 	infor1->s_i_1[infor1->size].name = name;
 	
-	cout<<"è¯·è¾“å…¥æ€§åˆ«:"<<endl;
-	cout<<"1-ç”·"<<endl;
-	cout<<"2-å¥³"<<endl;
+	cout<<"ÇëÊäÈëĞÔ±ğ:"<<endl;
+	cout<<"1-ÄĞ"<<endl;
+	cout<<"2-Å®"<<endl;
 	int sex;
 	cin>>sex;
 	infor1->s_i_1[infor1->size].sex = sex;
 	
-	cout<<"è¯·è¾“å…¥ç­çº§:"<<endl;
+	cout<<"ÇëÊäÈë°à¼¶:"<<endl;
 	string clas;
 	cin>>clas;
 	infor1->s_i_1[infor1->size].clas = clas;
 	
-	cout<<"è¯·è¾“å…¥ä¸“ä¸š:"<<endl;
+	cout<<"ÇëÊäÈë×¨Òµ:"<<endl;
 	string specialty;
 	cin>>specialty;
 	infor1->s_i_1[infor1->size].specialty = specialty;
@@ -155,7 +270,7 @@ void input_information1(information1 *infor1)
 
 int check_information1(information1 *infor1)
 {
-	cout<<"è¯·è¾“å…¥å­¦ç”Ÿå­¦å·ï¼š"<<endl;
+	cout<<"ÇëÊäÈëÑ§ÉúÑ§ºÅ£º"<<endl;
 	long int student_number;
 	cin>>student_number;
 	for(int i=0;i<infor1->size;i++)
@@ -173,16 +288,16 @@ void change_information1(information1 *infor1)
 	int test = check_information1(infor1);
 	if(test == -1)
 	{
-		cout<<"è¯¥å­¦å·ä¸å­˜åœ¨ï¼Œè¯·é‡æ–°è¾“å…¥"<<endl; 
+		cout<<"¸ÃÑ§ºÅ²»´æÔÚ£¬ÇëÖØĞÂÊäÈë"<<endl; 
 	}
 	
 	else
 	{
-		cout<<"è¯·è¾“å…¥ä¿®æ”¹ä¿¡æ¯ï¼š"<<endl;
-		cout<<"1.å§“å"<<endl;
-		cout<<"2.æ€§åˆ«"<<endl;
-		cout<<"3.ç­çº§"<<endl;
-		cout<<"4.ä¸“ä¸š"<<endl;
+		cout<<"ÇëÊäÈëĞŞ¸ÄĞÅÏ¢£º"<<endl;
+		cout<<"1.ĞÕÃû"<<endl;
+		cout<<"2.ĞÔ±ğ"<<endl;
+		cout<<"3.°à¼¶"<<endl;
+		cout<<"4.×¨Òµ"<<endl;
 		
 		int select;
 		cin>>select;
@@ -190,7 +305,7 @@ void change_information1(information1 *infor1)
 		{
 			case 1:
 				{
-				cout<<"è¯·è¾“å…¥å§“å:"<<endl;
+				cout<<"ÇëÊäÈëĞÕÃû:"<<endl;
 				string name;
 				cin>>name;
 				infor1->s_i_1[test].name = name;
@@ -198,9 +313,9 @@ void change_information1(information1 *infor1)
 				}
 			case 2:
 				{
-				cout<<"è¯·è¾“å…¥æ€§åˆ«:"<<endl;
-				cout<<"1-ç”·"<<endl;
-				cout<<"2-å¥³"<<endl;
+				cout<<"ÇëÊäÈëĞÔ±ğ:"<<endl;
+				cout<<"1-ÄĞ"<<endl;
+				cout<<"2-Å®"<<endl;
 				int sex;
 				cin>>sex;
 				infor1->s_i_1[test].sex = sex;
@@ -208,7 +323,7 @@ void change_information1(information1 *infor1)
 				}
 			case 3:
 				{
-				cout<<"è¯·è¾“å…¥ç­çº§:"<<endl;
+				cout<<"ÇëÊäÈë°à¼¶:"<<endl;
 				string clas;
 				cin>>clas;
 				infor1->s_i_1[test].clas = clas;
@@ -216,14 +331,14 @@ void change_information1(information1 *infor1)
 				}
 			case 4:
 				{
-				cout<<"è¯·è¾“å…¥ä¸“ä¸š:"<<endl;
+				cout<<"ÇëÊäÈë×¨Òµ:"<<endl;
 				string specialty;
 				cin>>specialty;
 				infor1->s_i_1[test].specialty = specialty;
 				break;	
 				}	
 		} 
-		cout<<"ä¿®æ”¹æˆåŠŸï¼"<<endl;
+		cout<<"ĞŞ¸Ä³É¹¦£¡"<<endl;
 	}
 	system("pause");
 	system("cls");
@@ -234,7 +349,7 @@ void delect_information1(information1 *infor1)
 	int test = check_information1(infor1);
 		if(test == -1)
 		{
-			cout<<"è¯¥å­¦å·ä¸å­˜åœ¨ï¼Œè¯·é‡æ–°è¾“å…¥"<<endl; 
+			cout<<"¸ÃÑ§ºÅ²»´æÔÚ£¬ÇëÖØĞÂÊäÈë"<<endl; 
 		}
 		
 		else
@@ -244,7 +359,7 @@ void delect_information1(information1 *infor1)
 				infor1->s_i_1[i] = infor1->s_i_1[i+1];
 			}
 			infor1->size--;
-			cout<<"åˆ é™¤æˆåŠŸ"<<endl; 
+			cout<<"É¾³ı³É¹¦"<<endl; 
 		}
 	system("pause");
 	system("cls"); 
@@ -255,16 +370,16 @@ void look_information1(information1 *infor1)
 	int test = check_information1(infor1);
 		if(test == -1)
 		{
-			cout<<"è¯¥å­¦å·ä¸å­˜åœ¨ï¼Œè¯·é‡æ–°è¾“å…¥"<<endl; 
+			cout<<"¸ÃÑ§ºÅ²»´æÔÚ£¬ÇëÖØĞÂÊäÈë"<<endl; 
 		}
 		
 		else
 		{
-			cout<<"å§“å:"<<infor1->s_i_1[test].name<<"   "
-			<<"æ€§åˆ«:"<<(infor1->s_i_1[test].sex==1?"ç”·":"å¥³")<<"   "
-			<<"ç­çº§:" <<infor1->s_i_1[test].clas<<"   "
-			<<"ä¸“ä¸š:"<<infor1->s_i_1[test].specialty<<"   "
-			<<"å­¦å·:"<<infor1->s_i_1[test].student_number<<endl;
+			cout<<"ĞÕÃû:"<<infor1->s_i_1[test].name<<"   "
+			<<"ĞÔ±ğ:"<<(infor1->s_i_1[test].sex==1?"ÄĞ":"Å®")<<"   "
+			<<"°à¼¶:" <<infor1->s_i_1[test].clas<<"   "
+			<<"×¨Òµ:"<<infor1->s_i_1[test].specialty<<"   "
+			<<"Ñ§ºÅ:"<<infor1->s_i_1[test].student_number<<endl;
 		}
 		system("pause");
 		system("cls");
@@ -274,13 +389,322 @@ void putout_information1(information1 *infor1)
 {
 	for(int i=0;i<infor1->size;i++)
 	{
-		cout<<"å§“å:"<<infor1->s_i_1[i].name<<"   "
-		<<"æ€§åˆ«:"<<(infor1->s_i_1[i].sex==1?"ç”·":"å¥³")<<"   "
-		<<"ç­çº§:" <<infor1->s_i_1[i].clas<<"   "
-		<<"ä¸“ä¸š:"<<infor1->s_i_1[i].specialty<<"   "
-		<<"å­¦å·:"<<infor1->s_i_1[i].student_number<<endl;
+		cout<<"ĞÕÃû:"<<infor1->s_i_1[i].name<<"   "
+		<<"ĞÔ±ğ:"<<(infor1->s_i_1[i].sex==1?"ÄĞ":"Å®")<<"   "
+		<<"°à¼¶:" <<infor1->s_i_1[i].clas<<"   "
+		<<"×¨Òµ:"<<infor1->s_i_1[i].specialty<<"   "
+		<<"Ñ§ºÅ:"<<infor1->s_i_1[i].student_number<<endl;
 	}
 	 
+	system("pause");
+	system("cls");
+}
+
+void input_score(score *scor,information1 *infor1)
+{
+	cout<<"ÇëÊäÈëĞÕÃû:"<<endl;
+	string name;
+	cin>>name;
+	scor->s_c[scor->size].name = name;
+	
+	int test = check_person(scor,infor1);
+		
+	if(test == -1)
+	{
+		cout<<"Ñ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³ÖĞ²éÎŞ´ËÈË£¬Çë¼ì²éÊÇ·ñÊäÈëÕıÈ·£¡"<<endl; 
+	}
+	
+	else
+	{
+	cout<<"ÇëÊäÈë°à¼¶:"<<endl;
+	string clas;
+	cin>>clas;
+	scor->s_c[scor->size].clas = clas;
+	
+	
+	cout<<"¸ßÊı³É¼¨£º"<<endl;
+	int high_math;
+	cin>>high_math;
+	scor->s_c[scor->size].high_math = high_math;
+	
+	cout<<"Ó¢Óï³É¼¨£º"<<endl;
+	int english;
+	cin>>english;
+	scor->s_c[scor->size].english = english;
+	
+	cout<<"cÓïÑÔ³É¼¨£º"<<endl;
+	int c_language;
+	cin>>c_language;
+	scor->s_c[scor->size].c_language = c_language;	
+		
+	int sum;
+	sum = scor->s_c[scor->size].high_math + scor->s_c[scor->size].english + scor->s_c[scor->size].c_language;
+	scor->s_c[scor->size].sum_score = sum;
+
+	scor->size++;
+	
+	cout_ranking(scor);			
+	}
+	system("pause");
+	system("cls");
+}
+
+void cout_ranking(score *scor)
+{
+	for(int i=0;i<scor->size;i++)
+	{
+		for(int j=0;j<scor->size;j++)
+		{
+			if(scor->s_c[j].sum_score<scor->s_c[j+1].sum_score)
+			{
+				struct student_score temp = scor->s_c[j];
+				scor->s_c[j] = scor->s_c[j+1];
+				scor->s_c[j+1] = temp;
+			}
+		}
+	}	
+	
+	for(int k=0;k<scor->size;k++)
+	{
+		scor->s_c[k].school_ranking = k+1;
+	}
+}
+
+void putout_score(score *scor)
+{
+	for(int i=0;i<scor->size;i++)
+	{
+		cout<<"ĞÕÃû:"<<scor->s_c[i].name<<"   "
+		<<"Ñ§ºÅ:"<<scor->s_c[i].student_number<<"   "
+		<<"°à¼¶:"<<scor->s_c[i].clas<<"   " 
+		<<"¸ßÊı:"<<scor->s_c[i].high_math<<"   "
+		<<"Ó¢Óï:"<<scor->s_c[i].english<<"   "
+		<<"cÓïÑÔ:"<<scor->s_c[i].c_language<<"   "
+		<<"×Ü³É¼¨"<<scor->s_c[i].sum_score<<"   "
+		<<"°àÅÅÃû"<<scor->s_c[i].class_ranking<<"   " 
+		<<"Ğ£ÅÅÃû:"<<scor->s_c[i].school_ranking<<endl;
+	}
+	system("pause");
+	system("cls");
+}
+
+int check_person(score *scor,information1 *infor1)
+{
+	int num = 0;
+	
+	for(int i=0;i<infor1->size;i++)
+	{
+		if(scor->s_c[scor->size].name == infor1->s_i_1[i].name)
+		{
+			scor->s_c[scor->size].student_number = infor1->s_i_1[i].student_number;
+			return 1;
+			break;
+		}
+		
+		else{
+			num++;
+		}
+	}
+	
+	if(num==infor1->size)
+	{
+		return -1;
+	}
+	
+	return 0;
+}
+
+int check_number(score *scor)
+{
+	cout<<"ÇëÊäÈëÑ§ÉúÑ§ºÅ£º"<<endl;
+	long int student_number;
+	cin>>student_number;
+	for(int i=0;i<scor->size;i++)
+	{
+		if(scor->s_c[i].student_number == student_number)
+		{
+			return i;
+		}
+	}
+	return -1;
+}
+
+void change_score(score *scor)
+{
+	int test = check_number(scor);
+	if(test == -1)
+	{
+		cout<<"¸ÃÑ§ºÅ²»´æÔÚ£¬ÇëÖØĞÂÊäÈë"<<endl; 
+	}
+	
+	else
+	{
+		while(true)
+		{	
+			cout<<"ÇëÊäÈëĞŞ¸ÄĞÅÏ¢£º"<<endl;
+			cout<<"1.ĞÕÃû"<<endl;
+			cout<<"2.°à¼¶"<<endl;
+			cout<<"3.¸ßÊı³É¼¨"<<endl;
+			cout<<"4.Ó¢Óï³É¼¨"<<endl;
+			cout<<"5.cÓïÑÔ³É¼¨"<<endl;
+			cout<<"6.ÍË³öĞŞ¸Ä"<<endl;
+			
+			int select;
+			cin>>select;
+			if(select==6)
+			{
+				break;
+			}
+			
+			else
+			{
+				switch(select)
+				{
+				case 1:
+					{
+					cout<<"ÇëÊäÈëĞÕÃû:"<<endl;
+					string name;
+					cin>>name;
+					scor->s_c[test].name = name;
+					break;					
+					}
+				case 2:
+					{
+					cout<<"ÇëÊäÈë°à¼¶:"<<endl;
+					string clas;
+					cin>>clas;
+					scor->s_c[test].clas = clas;	
+					break;	
+					}
+				case 3:
+					{
+					cout<<"¸ßÊı³É¼¨£º"<<endl;
+					int high_math;
+					cin>>high_math;
+					scor->s_c[test].high_math = high_math;
+					break;		
+					}
+				case 4:
+					{
+					cout<<"Ó¢Óï³É¼¨£º"<<endl;
+					int english;
+					cin>>english;
+					scor->s_c[test].english = english;
+					break;		
+					}
+				case 5:
+					{
+					cout<<"cÓïÑÔ³É¼¨£º"<<endl;
+					int c_language;
+					cin>>c_language;
+					scor->s_c[test].c_language = c_language;		
+					}
+				}
+			system("cls");
+			}
+		}
+	cout<<"ĞŞ¸Ä³É¹¦"<<endl;	
+	int sum;
+	sum = scor->s_c[test].high_math + scor->s_c[test].english + scor->s_c[test].c_language;
+	scor->s_c[test].sum_score = sum;
+	
+	cout_ranking(scor);
+	}
+	system("pause");
+	system("cls");
+}
+
+void delect_student(score *scor)
+{
+	int test = check_number(scor);
+	if(test == -1)
+	{
+		cout<<"¸ÃÑ§ºÅ²»´æÔÚ£¬ÇëÖØĞÂÊäÈë"<<endl; 
+	}
+			
+	else
+	{
+		for(int i=test;i<scor->size+1;i++)
+		{
+			scor->s_c[i] = scor->s_c[i+1];
+		}
+		scor->size--;
+		cout<<"É¾³ı³É¹¦"<<endl; 
+	}
+	cout_ranking(scor);
+	system("pause");
+	system("cls"); 
+}
+
+void look_score(score *scor)
+{
+	int test = check_number(scor);
+	if(test == -1)
+	{
+		cout<<"¸ÃÑ§ºÅ²»´æÔÚ£¬ÇëÖØĞÂÊäÈë"<<endl; 
+	}
+	
+	else{
+	cout<<"ĞÕÃû:"<<scor->s_c[test].name<<"   "
+	<<"Ñ§ºÅ:"<<scor->s_c[test].student_number<<"   "
+	<<"°à¼¶:"<<scor->s_c[test].clas<<"   " 
+	<<"¸ßÊı:"<<scor->s_c[test].high_math<<"   "
+	<<"Ó¢Óï:"<<scor->s_c[test].english<<"   "
+	<<"cÓïÑÔ:"<<scor->s_c[test].c_language<<"   "
+	<<"×Ü³É¼¨"<<scor->s_c[test].sum_score<<"   "
+	<<"Ğ£ÅÅÃû:"<<scor->s_c[test].school_ranking<<endl;		
+	}
+	system("pause");
+	system("cls");
+}
+
+void class_management(score *scor,string *arr)
+{
+	for(int i=0;i<scor->size;i++)
+	{
+		arr[i] = scor->s_c[i].clas;
+	}
+		
+	string temp[100];
+	int m = 0;
+	for(int j=0;j<100;j++)
+	{
+		int k = 0;
+		for(;k<m;k++)
+		{
+			if(arr[j]==temp[k])
+			{
+				break;
+			}
+		}
+			
+		if(k == m)
+		{
+			temp[m] = arr[j];
+			m++;
+		}
+	}
+	
+	for(int i=0;i<100;i++)
+	{
+		int k=0;
+		for(int j=0;j<100;j++)
+		{
+			for(;k<scor->size;k++)
+			{
+				if(scor->s_c[k].clas != " ")
+				{
+					if(scor->s_c[k].clas == temp[i])
+					{
+						scor->s_c[k].class_ranking = j+1;
+						k = k+1;
+						break;
+					}		
+				}
+			}
+		}
+	} 
+	cout<<"¼ÆËãÍê³É"<<endl;
 	system("pause");
 	system("cls");
 }
