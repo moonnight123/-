@@ -1,6 +1,4 @@
-#include <iostream>
-#include "student_system_h.cpp"
-using namespace std;
+#include "student_system_t.h"
 
 int main(){
 	int select;
