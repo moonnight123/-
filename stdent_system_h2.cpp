@@ -1,48 +1,48 @@
-#include "student_system_t.h"
+#include "student_system_t2.h"
 
-
-struct student_information1
+struct student_information2
 {
 	string name = " ";
 	int sex = 0;
 	string clas = " ";
 	string specialty = " ";
+	string research_direction = " ";
+	string tutor = " ";
 	long int student_number = 0;
 };
 
-struct information1
+struct information2
 {
-	student_information1 s_i_1[MAX];
+	student_information2 s_i_2[MAX];
 	int size = 0;
-}infor1;
+}infor2;
 
-struct student_score
+struct student_score2
 {
 	string name = " ";
 	string clas = " ";
-	int high_math = 0;
-	int english = 0;
-	int c_language = 0;
+	int all_class_score = 0;
+	int thesis = 0;
 	int sum_score = 0;
 	int class_ranking = 0;
 	int school_ranking = 0;
 	long int student_number = 0;
 };
 
-struct score
+struct score2
 {
-	student_score s_c[MAX];
+	student_score2 s_c_2[MAX];
 	int size = 0;
-}scor;
+}scor2;
 
-int ben_student_system()
+int yan_student_system()
 {
 	int select1, select2;
 
 	while (true)
 	{
-		cout << "1.本科生信息管理系统" << endl;
-		cout << "2.本科生成绩管理系统" << endl;
+		cout << "1.研究生信息管理系统" << endl;
+		cout << "2.研究生成绩管理系统" << endl;
 		cout << "3.将信息成绩输入表格" << endl;
 		cout << "4.退出学生管理系统" << endl;
 		cin >> select1;
@@ -67,8 +67,8 @@ int ben_student_system()
 				switch (select2)
 				{
 				case 1:
-					input_information1(&infor1);
-					//输入学生信息
+					input_information2(&infor2);
+					//学生基本信息输入
 					break;
 				case 2:
 					//学生基本信息修改
@@ -137,44 +137,52 @@ int ben_student_system()
 
 		else if (select1 == 4)
 		{
-			//退出本科生系统
+			//退出研究生系统
 			system("pause");
 			return 0;
 		}
 	}
-
 }
 
-void input_information1(information1* infor1)
+void input_information2(information2* infor2)
 {
 	cout << "请输入姓名:" << endl;
 	string name;
 	cin >> name;
-	infor1->s_i_1[infor1->size].name = name;
+	infor2->s_i_2[infor2->size].name = name;
 
 	cout << "请输入性别:" << endl;
 	cout << "1-男" << endl;
 	cout << "2-女" << endl;
 	int sex;
 	cin >> sex;
-	infor1->s_i_1[infor1->size].sex = sex;
+	infor2->s_i_2[infor2->size].sex = sex;
 
 	cout << "请输入班级:" << endl;
 	string clas;
 	cin >> clas;
-	infor1->s_i_1[infor1->size].clas = clas;
+	infor2->s_i_2[infor2->size].clas = clas;
 
 	cout << "请输入专业:" << endl;
 	string specialty;
 	cin >> specialty;
-	infor1->s_i_1[infor1->size].specialty = specialty;
+	infor2->s_i_2[infor2->size].specialty = specialty;
+
+	cout << "请输入研究方向：" << endl;
+	string research_direction;
+	cin >> research_direction;
+	infor2->s_i_2[infor2->size].research_direction = research_direction;
+
+	cout << "请输入导师姓名：" << endl;
+	string tutor;
+	cin >> tutor;
+	infor2->s_i_2[infor2->size].tutor = tutor;
 
 	long int student_number;
-	student_number = rand() % 10000 + 20200000;
-	infor1->s_i_1[infor1->size].student_number = student_number;
+	student_number = rand() % 10000 + 20190000;
+	infor2->s_i_2[infor2->size].student_number = student_number;
 
-	infor1->size++;
+	infor2->size++;
 
 	system("cls");
 }
-

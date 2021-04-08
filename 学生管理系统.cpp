@@ -1,4 +1,5 @@
 #include "student_system_t.h"
+#include "student_system_t2.h"
 
 int main(){
 	int select;
@@ -8,6 +9,7 @@ int main(){
 		cout << "2.研究生管理系统" << endl;
 		cout << "3.退出系统" << endl;
 		cin >> select;
+		system("cls");
 		switch (select)
 		{
 		case 1:
