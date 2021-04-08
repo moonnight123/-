@@ -15,3 +15,8 @@ struct score;
 
 int ben_student_system();
 void input_information1(information1* infor1);
+void putout_information1(information1* infor1);
+int check_information1(information1* infor1);
+void change_information1(information1* infor1);
+void delect_information1(information1* infor1);
+void look_information1(information1* infor1);

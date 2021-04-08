@@ -71,15 +71,19 @@ int yan_student_system()
 					//学生基本信息输入
 					break;
 				case 2:
+					change_information2(&infor2);
 					//学生基本信息修改
 					break;
 				case 3:
+					delect_information2(&infor2);
 					//删除学生基本资料
 					break;
 				case 4:
+					look_information2(&infor2);
 					//查询学生基本资料
 					break;
 				case 5:
+					putout_information2(&infor2);
 					//输出学生基本资料
 					break;
 				}
@@ -184,5 +188,159 @@ void input_information2(information2* infor2)
 
 	infor2->size++;
 
+	system("cls");
+}
+
+void putout_information2(information2* infor2)
+{
+	for (int i = 0; i < infor2->size; i++)
+	{
+		cout << "姓名:" << infor2->s_i_2[i].name << "   "
+			<< "性别:" << (infor2->s_i_2[i].sex == 1 ? "男" : "女") << "   "
+			<< "班级:" << infor2->s_i_2[i].clas << "   "
+			<< "专业:" << infor2->s_i_2[i].specialty << "   "
+			<< "研究方向:" << infor2->s_i_2[i].research_direction << "   "
+			<< "导师:" << infor2->s_i_2[i].tutor << "   "
+			<< "学号:" << infor2->s_i_2[i].student_number << endl;
+	}
+
+	system("pause");
+	system("cls");
+}
+
+int check_information2(information2* infor2)
+{
+	cout << "请输入学生学号：" << endl;
+	long int student_number;
+	cin >> student_number;
+	for (int i = 0; i < infor2->size; i++)
+	{
+		if (infor2->s_i_2[i].student_number == student_number)
+		{
+			return i;
+		}
+	}
+	return -1;
+}
+
+void change_information2(information2* infor2)
+{
+	int test = check_information2(infor2);
+	if (test == -1)
+	{
+		cout << "该学号不存在，请重新输入" << endl;
+	}
+
+	else
+	{
+		cout << "请输入修改信息：" << endl;
+		cout << "1.姓名" << endl;
+		cout << "2.性别" << endl;
+		cout << "3.班级" << endl;
+		cout << "4.专业" << endl;
+		cout << "5.研究方向" << endl;
+		cout << "6.导师" << endl;
+
+		int select;
+		cin >> select;
+		switch (select)
+		{
+		case 1:
+		{
+			cout << "请输入姓名:" << endl;
+			string name;
+			cin >> name;
+			infor2->s_i_2[test].name = name;
+			break;
+		}
+		case 2:
+		{
+			cout << "请输入性别:" << endl;
+			cout << "1-男" << endl;
+			cout << "2-女" << endl;
+			int sex;
+			cin >> sex;
+			infor2->s_i_2[test].sex = sex;
+			break;
+		}
+		case 3:
+		{
+			cout << "请输入班级:" << endl;
+			string clas;
+			cin >> clas;
+			infor2->s_i_2[test].clas = clas;
+			break;
+		}
+		case 4:
+		{
+			cout << "请输入专业:" << endl;
+			string specialty;
+			cin >> specialty;
+			infor2->s_i_2[test].specialty = specialty;
+			break;
+		}
+		case 5:
+		{
+			cout << "请输入研究方向：" << endl;
+			string research_direction;
+			cin >> research_direction;
+			infor2->s_i_2[test].research_direction = research_direction;
+			break;
+		}
+		case 6:
+		{
+			cout << "请输入导师姓名：" << endl;
+			string tutor;
+			cin >> tutor;
+			infor2->s_i_2[test].tutor = tutor;
+			break;
+		}
+		}
+		cout << "修改成功！" << endl;
+	}
+	system("pause");
+	system("cls");
+}
+
+void delect_information2(information2* infor2)
+{
+	int test = check_information2(infor2);
+	if (test == -1)
+	{
+		cout << "该学号不存在，请重新输入" << endl;
+	}
+
+	else
+	{
+		for (int i = test; i < infor2->size + 1; i++)
+		{
+			infor2->s_i_2[i] = infor2->s_i_2[i + 1];
+		}
+		infor2->size--;
+		cout << "删除成功" << endl;
+	}
+	system("pause");
+	system("cls");
+}
+
+void look_information2(information2* infor2)
+{
+	int test = check_information2(infor2);
+	if (test == -1)
+	{
+		cout << "该学号不存在，请重新输入" << endl;
+	}
+
+	else
+	{
+		cout << "姓名:" << infor2->s_i_2[test].name << "   "
+			<< "性别:" << (infor2->s_i_2[test].sex == 1 ? "男" : "女") << "   "
+			<< "班级:" << infor2->s_i_2[test].clas << "   "
+			<< "专业:" << infor2->s_i_2[test].specialty << "   "
+			<< "研究方向:" << infor2->s_i_2[test].research_direction << "   "
+			<< "导师:" << infor2->s_i_2[test].tutor << "   "
+			<< "学号:" << infor2->s_i_2[test].student_number << endl;
+	}
+	system("pause");
 	system("cls");
 }
