@@ -25,3 +25,8 @@ void look_information2(information2* infor2);//查询个人信息的函数
 int check_person(score2* scor2, information2* infor2);//判断查询信息系统中是否有输入学生姓名的函数
 void input_score(score2* scor2, information2* infor2);//成绩输入的函数
 void cout_ranking(score2* scor2);//计算学校总排名的函数
+int check_number(score2* scor2);
+void change_score(score2* scor2);
+void delect_student(score2* scor2);
+void look_score(score2* scor2);
+void putout_score(score2* scor2);

@@ -145,16 +145,21 @@ void yan_student_score_system()
 			break;
 		case 3:
 		{
+			change_score(&scor2);
+			cout_ranking(&scor2);
 			//学生成绩修改
 			break;
 		}
 		case 4:
+			delect_student(&scor2);
 			//学生成绩删除
 			break;
 		case 5:
+			look_score(&scor2);
 			//学生成绩查询
 			break;
 		case 6:
+			putout_score(&scor2);
 			//学生成绩输出
 			break;
 		}
@@ -460,4 +465,156 @@ void cout_ranking(score2* scor2)
 	{
 		scor2->s_c_2[k].school_ranking = k + 1;
 	}
+}
+
+int check_number(score2* scor2)
+{
+	cout << "请输入学生学号：" << endl;
+	long int student_number;
+	cin >> student_number;
+	for (int i = 0; i < scor2->size; i++)
+	{
+		if (scor2->s_c_2[i].student_number == student_number)
+		{
+			return i;
+		}
+	}
+	return -1;
+}
+
+void change_score(score2* scor2)
+{
+	int test = check_number(scor2);
+	if (test == -1)
+	{
+		cout << "该学号不存在，请重新输入" << endl;
+	}
+
+	else
+	{
+		while (true)
+		{
+			cout << "请输入修改信息：" << endl;
+			cout << "1.姓名" << endl;
+			cout << "2.班级" << endl;
+			cout << "3.课程总成绩成绩" << endl;
+			cout << "4.论文成绩" << endl;
+			cout << "6.退出修改" << endl;
+
+			int select;
+			cin >> select;
+			if (select == 6)
+			{
+				break;
+			}
+
+			else
+			{
+				switch (select)
+				{
+				case 1:
+				{
+					cout << "请输入姓名:" << endl;
+					string name;
+					cin >> name;
+					scor2->s_c_2[test].name = name;
+					break;
+				}
+				case 2:
+				{
+					cout << "请输入班级:" << endl;
+					string clas;
+					cin >> clas;
+					scor2->s_c_2[test].clas = clas;
+					break;
+				}
+				case 3:
+				{
+					cout << "课程总成绩成绩：" << endl;
+					int all_class_score;
+					cin >> all_class_score;
+					scor2->s_c_2[test].all_class_score = all_class_score;
+					break;
+				}
+				case 4:
+				{
+					cout << "论文成绩：" << endl;
+					int thesis;
+					cin >> thesis;
+					scor2->s_c_2[test].thesis = thesis;
+					break;
+				}
+				}
+				system("cls");
+			}
+		}
+		cout << "修改成功" << endl;
+		int sum;
+		sum = scor2->s_c_2[test].all_class_score + scor2->s_c_2[test].thesis;
+		scor2->s_c_2[test].sum_score = sum;
+
+		cout_ranking(scor2);
+	}
+	system("pause");
+	system("cls");
+}
+
+void delect_student(score2* scor2)
+{
+	int test = check_number(scor2);
+	if (test == -1)
+	{
+		cout << "该学号不存在，请重新输入" << endl;
+	}
+
+	else
+	{
+		for (int i = test; i < scor2->size + 1; i++)
+		{
+			scor2->s_c_2[i] = scor2->s_c_2[i + 1];
+		}
+		scor2->size--;
+		cout << "删除成功" << endl;
+	}
+	cout_ranking(scor2);
+	system("pause");
+	system("cls");
+}
+
+void look_score(score2* scor2)
+{
+	int test = check_number(scor2);
+	if (test == -1)
+	{
+		cout << "该学号不存在，请重新输入" << endl;
+	}
+
+	else {
+		cout << "姓名:" << scor2->s_c_2[test].name << "   "
+			<< "学号:" << scor2->s_c_2[test].student_number << "   "
+			<< "班级:" << scor2->s_c_2[test].clas << "   "
+			<< "课程总成绩:" << scor2->s_c_2[test].all_class_score << "   "
+			<< "论文成绩:" << scor2->s_c_2[test].thesis << "   "
+			<< "总成绩" << scor2->s_c_2[test].sum_score << "   "
+			<< "校排名:" << scor2->s_c_2[test].school_ranking << endl;
+	}
+	system("pause");
+	system("cls");
+}
+
+void putout_score(score2* scor2)
+{
+	for (int i = 0; i < scor2->size; i++)
+	{
+		cout << "姓名:" << scor2->s_c_2[i].name << "   "
+			<< "学号:" << scor2->s_c_2[i].student_number << "   "
+			<< "班级:" << scor2->s_c_2[i].clas << "   "
+			<< "课程总成绩:" << scor2->s_c_2[i].all_class_score << "   "
+			<< "论文成绩:" << scor2->s_c_2[i].thesis << "   "
+			<< "总成绩" << scor2->s_c_2[i].sum_score << "   "
+			<< "班排名" << scor2->s_c_2[i].class_ranking << "   "
+			<< "校排名:" << scor2->s_c_2[i].school_ranking << endl;
+	}
+	system("pause");
+	system("cls");
 }
