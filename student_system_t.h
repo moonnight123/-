@@ -31,3 +31,4 @@ void change_score(score* scor);//成绩修改的函数
 void delect_student(score* scor);//成绩删除的函数
 void look_score(score* scor);//查询成绩的函数
 void putout_score(score* scor);//成绩输出的函数
+void class_management(score* scor, string* arr);//班级排名的函数

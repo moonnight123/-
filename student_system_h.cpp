@@ -38,6 +38,7 @@ struct score
 int ben_student_system()
 {
 	int select1;
+	
 
 	while (true)
 	{
@@ -120,6 +121,7 @@ void ben_student_information_system()
 void ben_student_score_system()
 {
 	int select2;
+	string  arr[100];
 	//本科生成绩管理系统
 	while (true)
 	{
@@ -143,6 +145,7 @@ void ben_student_score_system()
 			//学生成绩输入
 			break;
 		case 2:
+			class_management(&scor, arr);
 			//学生成绩计算
 			break;
 		case 3:
@@ -602,6 +605,64 @@ void putout_score(score* scor)
 			<< "班排名" << scor->s_c[i].class_ranking << "   "
 			<< "校排名:" << scor->s_c[i].school_ranking << endl;
 	}
+	system("pause");
+	system("cls");
+}
+
+void class_management(score* scor, string* arr)
+{
+	//先将每个学生的班级输入到一个数组中再进行查重去除重复的班级
+	for (int i = 0; i < scor->size; i++)
+	{
+		arr[i] = scor->s_c[i].clas;
+	}
+
+	string temp[100];
+	int m = 0;
+	for (int j = 0; j < 100; j++)
+	{
+		int k = 0;
+		for (; k < m; k++)
+		{
+			if (arr[j] == temp[k])
+			{
+				break;
+			}
+		}
+
+		if (k == m)
+		{
+			temp[m] = arr[j];
+			m++;
+		}
+	}
+
+//遍历已经排好总成绩的学生，将每个学生分到对应的班级中，根据每个学生进入班级的次序对其进行排名
+	//i代表数组中的班级序号，从结构体中遍历学生所属的班级与序号为i的班级进行对比
+	for (int i = 0; i < 100; i++)
+	{
+		int k = 0;
+		//j代表班级中的排名，从结构体中选中符合i代表的班级的学生，从第一名开始进行排名
+		for (int j = 0; j < 100; j++)
+		{
+			//k代表结构体中学生的序号，从结构体中寻找符合上述条件的学生，如果从第k序号找到，为其赋予排名，再从k+1序号继续寻找，直到遍历完所有学生
+			for (; k < scor->size; k++)
+			{
+				//班级名不能的是空的
+				if (scor->s_c[k].clas != " ")
+				{
+					//遍历的学生班级要与班级数组中第i个班级的名称一致
+					if (scor->s_c[k].clas == temp[i])
+					{
+						scor->s_c[k].class_ranking = j + 1;
+						k = k + 1;
+						break;
+					}
+				}
+			}
+		}
+	}
+	cout << "计算完成" << endl;
 	system("pause");
 	system("cls");
 }

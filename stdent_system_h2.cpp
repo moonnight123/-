@@ -119,6 +119,8 @@ void yan_student_information_system()
 void yan_student_score_system()
 {
 	int select2;
+	string  arr[100];
+
 	while (true)
 	{
 		cout << "  1.学生成绩输入 " << endl;
@@ -141,12 +143,12 @@ void yan_student_score_system()
 			//学生成绩输入
 			break;
 		case 2:
+			class_management(&scor2, arr);
 			//学生成绩计算
 			break;
 		case 3:
 		{
 			change_score(&scor2);
-			cout_ranking(&scor2);
 			//学生成绩修改
 			break;
 		}
@@ -469,16 +471,19 @@ void cout_ranking(score2* scor2)
 
 int check_number(score2* scor2)
 {
+	//查询学生学号
 	cout << "请输入学生学号：" << endl;
 	long int student_number;
 	cin >> student_number;
 	for (int i = 0; i < scor2->size; i++)
 	{
+		//查到学生学号，返回学生在结构体中的的学号
 		if (scor2->s_c_2[i].student_number == student_number)
 		{
 			return i;
 		}
 	}
+	//没查到则返回-1
 	return -1;
 }
 
@@ -549,6 +554,8 @@ void change_score(score2* scor2)
 			}
 		}
 		cout << "修改成功" << endl;
+
+		//重新计算总成绩以及总排名
 		int sum;
 		sum = scor2->s_c_2[test].all_class_score + scor2->s_c_2[test].thesis;
 		scor2->s_c_2[test].sum_score = sum;
@@ -569,6 +576,7 @@ void delect_student(score2* scor2)
 
 	else
 	{
+		//通过将后一位学生的信息成绩前一位学生的信息的方法实现学生成绩的删除
 		for (int i = test; i < scor2->size + 1; i++)
 		{
 			scor2->s_c_2[i] = scor2->s_c_2[i + 1];
@@ -617,4 +625,60 @@ void putout_score(score2* scor2)
 	}
 	system("pause");
 	system("cls");
+}
+
+void class_management(score2* scor2, string* arr)
+{
+	//先将每个学生的班级输入到一个数组中再进行查重去除重复的班级
+	for (int i = 0; i < scor2->size; i++)
+	{
+		arr[i] = scor2->s_c_2[i].clas;
+	}
+
+	string temp[100];
+	int m = 0;
+	for (int j = 0; j < 100; j++)
+	{
+		int k = 0;
+		for (; k < m; k++)
+		{
+			if (arr[j] == temp[k])
+			{
+				break;
+			}
+		}
+
+		if (k == m)
+		{
+			temp[m] = arr[j];
+			m++;
+		}
+	}
+
+//遍历已经排好总成绩的学生，将每个学生分到对应的班级中，根据每个学生进入班级的次序对其进行排名
+	//i代表数组中的班级序号，从结构体中遍历学生所属的班级与序号为i的班级进行对比
+	for (int i = 0; i < 100; i++)
+	{
+		//j代表班级中的排名，从结构体中选中符合i代表的班级的学生，从第一名开始进行排名
+		int k = 0;
+		for (int j = 0; j < 100; j++)
+		{
+			//k代表结构体中学生的序号，从结构体中寻找符合上述条件的学生，如果从第k序号找到，为其赋予排名，再从k+1序号继续寻找，直到遍历完所有学生
+			for (; k < scor2->size; k++)
+			{
+				//班级名不能的是空的
+				if (scor2->s_c_2[k].clas != " ")
+				{
+					//遍历的学生班级要与班级数组中第i个班级的名称一致
+					if (scor2->s_c_2[k].clas == temp[i])
+					{
+						scor2->s_c_2[k].class_ranking = j + 1;
+						k = k + 1;
+						break;
+					}
+				}
+			}
+		}
+	}
+	cout << "计算完成" << endl;
 }
