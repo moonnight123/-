@@ -39,6 +39,7 @@ int ben_student_system()
 {
 	int select1;
 	
+	ben_putin_file(&infor1, &scor);
 
 	while (true)
 	{
@@ -62,6 +63,7 @@ int ben_student_system()
 		else if (select1 == 3)
 		{
 			//文件传输至excl表中
+			ben_putout_file();
 		}
 
 
@@ -169,6 +171,161 @@ void ben_student_score_system()
 			break;
 		}
 	}
+}
+
+void ben_putout_file()
+{
+	ofstream ofs;
+
+	ofs.open("C:\\Users\\pqy18770657781\\Desktop\\vs2019\\student score system\\student score system\\本科生成绩管理系统.xls", ios::out);
+	ofs << "学号\t" << "姓名\t" << "性别\t" << "班级\t" << "专业\t" << "高数\t" << "英语\t" << "C语言\t" << "总成绩\t" << "班排名\t" << "校排名\n";
+	
+	for (int i = 0; i < infor1.size; i++)
+	{
+		ofs << infor1.s_i_1[i].student_number << "\t"
+			<< infor1.s_i_1[i].name << "\t"
+			<< (infor1.s_i_1[i].sex == 1 ? "男" : "女") << "\t"
+			<< infor1.s_i_1[i].clas << "\t"
+			<< infor1.s_i_1[i].specialty << "\t";
+
+		int number = infor1.s_i_1[i].student_number;
+		int test = check_number_file(&scor, number);
+		if (test == -1)
+		{
+			ofs << endl;
+		}
+
+		else {
+			ofs << scor.s_c[test].high_math << "\t"
+				<< scor.s_c[test].english << "\t"
+				<< scor.s_c[test].c_language << "\t"
+				<< scor.s_c[test].sum_score << "\t"
+				<< scor.s_c[test].class_ranking << "\t"
+				<< scor.s_c[test].school_ranking << "\t"
+				<< endl;
+		}
+
+	}
+	ofs.close();
+	cout << "输入成功！" << endl;
+	system("pause");
+	system("cls");
+}
+
+void ben_putin_file(information1* infor1, score* scor)
+{
+	ifstream ifs;
+	ifs.open("C:\\Users\\pqy18770657781\\Desktop\\vs2019\\student score system\\student score system\\本科生成绩管理系统.xls", ios::in);
+	char buf[1024] = { 0 };
+	for (int i = 0; i < 11; i++)
+	{
+		ifs >> buf;
+	}
+
+
+	while (ifs >> buf)
+	{
+		for (int i = 1; i < 12; i++)
+		{
+			if (i == 1)
+			{
+				long int student_number = 0;
+				student_number = atol(buf);
+				infor1->s_i_1[infor1->size].student_number = student_number;
+				scor->s_c[scor->size].student_number = student_number;
+				ifs >> buf;
+			}
+
+			else if (i == 2)
+			{
+				infor1->s_i_1[infor1->size].name = buf;
+				scor->s_c[scor->size].name = buf;
+				ifs >> buf;
+			}
+
+			else if (i == 3)
+			{
+				cout << buf;
+				int sex = 0;
+				if (buf == (string)"男")
+				{
+					sex = 1;
+				}
+
+				else if(buf == (string)"女")
+				{
+					sex = 2;
+				}
+
+				ifs >> buf;
+			}
+
+			else if (i == 4)
+			{
+				infor1->s_i_1[infor1->size].clas = buf;
+				scor->s_c[scor->size].clas = buf;
+				ifs >> buf;
+			}
+
+			else if (i == 5)
+			{
+				infor1->s_i_1[infor1->size].specialty = buf;
+				ifs >> buf;
+			}
+
+			else if (i == 6)
+			{
+				int high_math = 0;
+				high_math = atoi(buf);
+				scor->s_c[scor->size].high_math = high_math;
+				ifs >> buf;
+			}
+
+			else if (i == 7)
+			{
+				int english = 0;
+				english = atoi(buf);
+				scor->s_c[scor->size].english = english;
+				ifs >> buf;
+			}
+
+			else if (i == 8)
+			{
+				int c_language = 0;
+				c_language = atoi(buf);
+				scor->s_c[scor->size].c_language = c_language;
+				ifs >> buf;
+			}
+
+			else if (i == 9)
+			{
+				int sum_score = 0;
+				sum_score = atoi(buf);
+				scor->s_c[scor->size].sum_score = sum_score;
+				ifs >> buf;
+			}
+
+			else if (i == 10)
+			{
+				int class_ranking = 0;
+				class_ranking = atoi(buf);
+				scor->s_c[scor->size].class_ranking = class_ranking;
+				ifs >> buf;
+			}
+
+			else if (i == 11)
+			{
+				int school_ranking = 0;
+				school_ranking = atoi(buf);
+				scor->s_c[scor->size].school_ranking = school_ranking;
+			}
+		}
+
+		infor1->size++;
+		scor->size++;
+	}
+
+	ifs.close();
 }
 
 void input_information1(information1* infor1)
@@ -665,4 +822,16 @@ void class_management(score* scor, string* arr)
 	cout << "计算完成" << endl;
 	system("pause");
 	system("cls");
+}
+
+int check_number_file(score* scor, int number)
+{
+	for (int i = 0; i < scor->size; i++)
+	{
+		if (scor->s_c[i].student_number == number)
+		{
+			return i;
+		}
+	}
+	return -1;
 }

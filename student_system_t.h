@@ -15,7 +15,9 @@ struct score;
 
 int ben_student_system();//本科生系统
 void ben_student_information_system();//本科生信息管理系统
-void ben_student_score_system();
+void ben_student_score_system();//本科生成绩管理系统
+void ben_putin_file(information1* infor1, score* scor);
+void ben_putout_file();//将数据输入到excle表中
 void input_information1(information1* infor1);//信息输入的函数
 void putout_information1(information1* infor1);//信息输出函数
 int check_information1(information1* infor1);//查询学号的函数
@@ -32,3 +34,4 @@ void delect_student(score* scor);//成绩删除的函数
 void look_score(score* scor);//查询成绩的函数
 void putout_score(score* scor);//成绩输出的函数
 void class_management(score* scor, string* arr);//班级排名的函数
+int check_number_file(score* scor, int number);//检查成绩管理系统中是否有该学号的函数

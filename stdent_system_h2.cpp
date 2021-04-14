@@ -39,6 +39,8 @@ int yan_student_system()
 {
 	int select1;
 
+	yan_putin_file(&infor2, &scor2);
+
 	while (true)
 	{
 		cout << "1.研究生信息管理系统" << endl;
@@ -60,6 +62,7 @@ int yan_student_system()
 
 		else if (select1 == 3)
 		{
+			yan_putout_file();
 			//文件传输至excl表中
 		}
 
@@ -166,6 +169,164 @@ void yan_student_score_system()
 			break;
 		}
 	}
+}
+
+void yan_putout_file()
+{
+	ofstream ofs;
+	ofs.open("C:\\Users\\pqy18770657781\\Desktop\\vs2019\\student score system\\student score system\\研究生成绩管理系统.xls", ios::out);
+	ofs << "学号\t" << "姓名\t" << "性别\t" << "班级\t" << "专业\t" << "研究方向\t" << "导师\t" << "课程总成绩\t" << "论文成绩\t" << "总成绩\t" << "班排名\t" << "校排名\n";
+	for (int i = 0; i < infor2.size; i++)
+	{
+		ofs << infor2.s_i_2[i].student_number << "\t"
+			<< infor2.s_i_2[i].name << "\t"
+			<< (infor2.s_i_2[i].sex == 1 ? "男" : "女") << "\t"
+			<< infor2.s_i_2[i].clas << "\t"
+			<< infor2.s_i_2[i].specialty << "\t"
+			<< infor2.s_i_2[i].research_direction << "\t"
+			<< infor2.s_i_2[i].tutor << "\t";
+
+		int number = infor2.s_i_2[i].student_number;
+		int test = check_number_file(&scor2, number);
+		if (test == -1)
+		{
+			ofs << endl;
+		}
+
+		else {
+			ofs<< scor2.s_c_2[test].all_class_score << "\t"
+			<< scor2.s_c_2[test].thesis << "\t"
+			<< scor2.s_c_2[test].sum_score << "\t"
+			<< scor2.s_c_2[test].class_ranking << "\t"
+			<< scor2.s_c_2[test].school_ranking << "\t"
+			<< endl;
+		}
+		  
+	}
+	ofs.close();
+	cout << "输入成功！" << endl;
+	system("pause");
+	system("cls");
+}
+
+void yan_putin_file(information2* infor2, score2* scor2)
+{
+	ifstream ifs;
+	ifs.open("C:\\Users\\pqy18770657781\\Desktop\\vs2019\\student score system\\student score system\\研究生成绩管理系统.xls", ios::in);
+	char buf[1024] = { 0 };
+	for (int i = 0; i < 12; i++)
+	{
+		ifs >> buf;
+	}
+
+
+	while (ifs >> buf)
+	{
+		for (int i = 1; i < 13; i++)
+		{
+			if (i == 1)
+			{
+				long int student_number = 0;
+				student_number = atol(buf);
+				infor2->s_i_2[infor2->size].student_number = student_number;
+				scor2->s_c_2[scor2->size].student_number = student_number;
+				ifs >> buf;
+			}
+
+			else if (i == 2)
+			{
+				infor2->s_i_2[infor2->size].name = buf;
+				scor2->s_c_2[scor2->size].name = buf;
+				ifs >> buf;
+			}
+
+			else if (i == 3)
+			{
+				int sex = 0;
+				if (buf ==(string) "男")
+				{
+					sex = 1;
+				}
+
+				else if(buf == (string)"女")
+				{
+					sex = 2;
+				}
+
+				infor2->s_i_2[infor2->size].sex = sex;
+				ifs >> buf;
+			}
+
+			else if (i == 4)
+			{
+				infor2->s_i_2[infor2->size].clas = buf;
+				scor2->s_c_2[scor2->size].clas = buf;
+				ifs >> buf;
+			}
+
+			else if (i == 5)
+			{
+				infor2->s_i_2[infor2->size].specialty = buf;
+				ifs >> buf;
+			}
+
+			else if (i == 6)
+			{
+				infor2->s_i_2[infor2->size].research_direction = buf;
+				ifs >> buf;
+			}
+
+			else if (i == 7)
+			{
+				infor2->s_i_2[infor2->size].tutor = buf;
+				ifs >> buf;
+			}
+
+			else if (i == 8)
+			{
+				int all_class_score = 0;
+				all_class_score = atoi(buf);
+				scor2->s_c_2[scor2->size].all_class_score= all_class_score;
+				ifs >> buf;
+			}
+
+			else if (i == 9)
+			{
+				int thesis = 0;
+				thesis = atoi(buf);
+				scor2->s_c_2[scor2->size].thesis = thesis;
+				ifs >> buf;
+			}
+
+			else if (i == 10)
+			{
+				int sum_score = 0;
+				sum_score = atoi(buf);
+				scor2->s_c_2[scor2->size].sum_score= sum_score;
+				ifs >> buf;
+			}
+
+			else if (i == 11)
+			{
+				int class_ranking = 0;
+				class_ranking = atoi(buf);
+				scor2->s_c_2[scor2->size].class_ranking = class_ranking;
+				ifs >> buf;
+			}
+
+			else if (i == 12)
+			{
+				int school_ranking = 0;
+				school_ranking = atoi(buf);
+				scor2->s_c_2[scor2->size].school_ranking = school_ranking;
+			}
+		}
+
+		infor2->size++;
+		scor2->size++;
+	}
+
+	ifs.close();
 }
 
 void input_information2(information2* infor2)
@@ -681,4 +842,18 @@ void class_management(score2* scor2, string* arr)
 		}
 	}
 	cout << "计算完成" << endl;
+	system("pause");
+	system("cls");
+}
+
+int check_number_file(score2* scor2, int number)
+{
+	for (int i = 0; i < scor2->size; i++)
+	{
+		if (scor2->s_c_2[i].student_number == number)
+		{
+			return i;
+		}
+	}
+	return -1;
 }
