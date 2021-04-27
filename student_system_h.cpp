@@ -124,6 +124,7 @@ void ben_student_score_system()
 {
 	int select2;
 	string  arr[100];
+	string temp[100];
 	//本科生成绩管理系统
 	while (true)
 	{
@@ -147,7 +148,7 @@ void ben_student_score_system()
 			//学生成绩输入
 			break;
 		case 2:
-			class_management(&scor, arr);
+			class_management(&scor,arr,temp);
 			//学生成绩计算
 			break;
 		case 3:
@@ -245,7 +246,6 @@ void ben_putin_file(information1* infor1, score* scor)
 
 			else if (i == 3)
 			{
-				cout << buf;
 				int sex = 0;
 				if (buf == (string)"男")
 				{
@@ -320,11 +320,9 @@ void ben_putin_file(information1* infor1, score* scor)
 				scor->s_c[scor->size].school_ranking = school_ranking;
 			}
 		}
-
 		infor1->size++;
 		scor->size++;
 	}
-
 	ifs.close();
 }
 
@@ -566,8 +564,11 @@ void input_score(score* scor, information1* infor1)
 		scor->s_c[scor->size].c_language = c_language;
 
 		//计算总成绩
-		int sum;
-		sum = scor->s_c[scor->size].high_math + scor->s_c[scor->size].english + scor->s_c[scor->size].c_language;
+		int sum = 0;
+		if (high_math != -1 && english != -1 && c_language != -1)
+		{
+			sum = scor->s_c[scor->size].high_math + scor->s_c[scor->size].english + scor->s_c[scor->size].c_language;
+		}
 		scor->s_c[scor->size].sum_score = sum;
 
 		scor->size++;
@@ -693,8 +694,12 @@ void change_score(score* scor)
 			}
 		}
 		cout << "修改成功" << endl;
-		int sum;
-		sum = scor->s_c[test].high_math + scor->s_c[test].english + scor->s_c[test].c_language;
+		int sum = 0;
+		
+		if (scor->s_c[test].high_math != -1 && scor->s_c[test].english != -1 && scor->s_c[test].c_language != -1)
+		{
+			sum = scor->s_c[test].high_math + scor->s_c[test].english + scor->s_c[test].c_language;
+		}
 		scor->s_c[test].sum_score = sum;
 
 		cout_ranking(scor);
@@ -766,7 +771,7 @@ void putout_score(score* scor)
 	system("cls");
 }
 
-void class_management(score* scor, string* arr)
+void class_management(score* scor, string* arr, string *temp)
 {
 	//先将每个学生的班级输入到一个数组中再进行查重去除重复的班级
 	for (int i = 0; i < scor->size; i++)
@@ -774,7 +779,6 @@ void class_management(score* scor, string* arr)
 		arr[i] = scor->s_c[i].clas;
 	}
 
-	string temp[100];
 	int m = 0;
 	for (int j = 0; j < 100; j++)
 	{
@@ -835,3 +839,8 @@ int check_number_file(score* scor, int number)
 	}
 	return -1;
 }
+
+void statistics(string* temp, score* scor)
+{
+	
+}    

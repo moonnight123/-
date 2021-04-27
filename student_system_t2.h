@@ -11,6 +11,8 @@ struct student_information2;
 struct information2;
 struct student_score2;
 struct score2;
+struct one_class;
+struct all_class;
 
 int yan_student_system();//研究生管理系统
 void yan_student_information_system();//研究生信息管理系统
@@ -32,5 +34,11 @@ void change_score(score2* scor2);//修改学生成绩函数
 void delect_student(score2* scor2);//删除学生成绩的函数
 void look_score(score2* scor2);//查看单个学生成绩
 void putout_score(score2* scor2);//输出全部学生成绩
-void class_management(score2* scor2, string* arr);//计算学生班级排名
+void class_management(score2* scor2, string* arr,all_class *a_c);//计算学生班级排名
 int check_number_file(score2* scor2, int number);//检查成绩管理系统中是否有该学号的函数
+void cout_class(all_class* a_c);
+void cout_ave(all_class* a_c);
+void cout_abc(int i,int k,score2*scor2,all_class*a_c);
+void judje(int score,int num,int i,all_class*a_c);
+void print(all_class* a_c);
+int check_class(string clas, all_class* a_c);
