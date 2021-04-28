@@ -11,7 +11,8 @@ struct student_information1;
 struct information1;
 struct student_information1;
 struct score;
-
+struct one_class0;
+struct all_class0;
 
 int ben_student_system();//本科生系统
 void ben_student_information_system();//本科生信息管理系统
@@ -33,6 +34,11 @@ void change_score(score* scor);//成绩修改的函数
 void delect_student(score* scor);//成绩删除的函数
 void look_score(score* scor);//查询成绩的函数
 void putout_score(score* scor);//成绩输出的函数
-void class_management(score* scor, string* arr,string *temp);//班级排名的函数
+void class_management(score* scor, string* arr,string *temp,all_class0*a_c_0);//班级排名的函数
 int check_number_file(score* scor, int number);//检查成绩管理系统中是否有该学号的函数
-void statistics(string*temp,score *scor);
+void cout_class(all_class0* a_c_0);
+void cout_ave(all_class0* a_c_0);
+void cout_abc(int i, int k, score* scor, all_class0* a_c_0);
+void judje(int score, int num, int i, all_class0* a_c_0);
+void print(all_class0* a_c_0);
+int check_class(string clas, all_class0* a_c_0);

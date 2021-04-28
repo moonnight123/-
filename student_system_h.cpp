@@ -35,6 +35,27 @@ struct score
 	int size = 0;//记录学生个数
 }scor;
 
+struct one_class0
+{
+	string clas = " ";
+	int high_math_sum = 0;
+	int english_sum = 0;
+	int c_language_sum = 0;
+	double high_math_ave = 0;
+	double english_ave = 0;
+	double c_language_ave = 0;
+	int size = 0;
+	int a = 0, b = 0, c = 0, d = 0, e = 0;
+	int a2 = 0, b2 = 0, c2 = 0, d2 = 0, e2 = 0;
+	int a3 = 0, b3 = 0, c3 = 0, d3 = 0, e3 = 0;
+};
+
+struct all_class0
+{
+	one_class0 o_c_0[MAX];
+	int size = 0;
+}a_c_0;
+
 int ben_student_system()
 {
 	int select1;
@@ -134,10 +155,11 @@ void ben_student_score_system()
 		cout << "  4.学生成绩删除 " << endl;
 		cout << "  5.学生成绩查询 " << endl;
 		cout << "  6.学生成绩输出 " << endl;
-		cout << "7.退出成绩管理系统 " << endl;
+		cout << "7.学生成绩统计输出" << endl;
+		cout << "8.退出成绩管理系统 " << endl;
 		cin >> select2;
 		system("cls");
-		if (select2 == 7)
+		if (select2 == 8)
 		{
 			break;
 		}
@@ -148,7 +170,7 @@ void ben_student_score_system()
 			//学生成绩输入
 			break;
 		case 2:
-			class_management(&scor,arr,temp);
+			class_management(&scor,arr,temp,&a_c_0);
 			//学生成绩计算
 			break;
 		case 3:
@@ -169,6 +191,10 @@ void ben_student_score_system()
 		case 6:
 			putout_score(&scor);
 			//学生成绩输出
+			break;
+
+		case 7:
+			cout_class(&a_c_0);
 			break;
 		}
 	}
@@ -771,7 +797,7 @@ void putout_score(score* scor)
 	system("cls");
 }
 
-void class_management(score* scor, string* arr, string *temp)
+void class_management(score* scor, string* arr, string *temp,all_class0 *a_c_0)
 {
 	//先将每个学生的班级输入到一个数组中再进行查重去除重复的班级
 	for (int i = 0; i < scor->size; i++)
@@ -798,6 +824,12 @@ void class_management(score* scor, string* arr, string *temp)
 		}
 	}
 
+	for (int n = 0; n < m - 1; n++)
+	{
+		a_c_0->o_c_0[a_c_0->size].clas = temp[n];
+		a_c_0->size++;
+	}
+
 //遍历已经排好总成绩的学生，将每个学生分到对应的班级中，根据每个学生进入班级的次序对其进行排名
 	//i代表数组中的班级序号，从结构体中遍历学生所属的班级与序号为i的班级进行对比
 	for (int i = 0; i < 100; i++)
@@ -816,6 +848,12 @@ void class_management(score* scor, string* arr, string *temp)
 					if (scor->s_c[k].clas == temp[i])
 					{
 						scor->s_c[k].class_ranking = j + 1;
+						a_c_0->o_c_0[i].high_math_sum = a_c_0->o_c_0[i].high_math_sum + scor->s_c[k].high_math;
+						a_c_0->o_c_0[i].english_sum = a_c_0->o_c_0[i].english_sum + scor->s_c[k].english;
+						a_c_0->o_c_0[i].c_language_sum = a_c_0->o_c_0[i].c_language_sum + scor->s_c[k].c_language;
+						scor->s_c[k].class_ranking = j + 1;
+						a_c_0->o_c_0[i].size++;
+						cout_abc(i, k, scor, a_c_0);
 						k = k + 1;
 						break;
 					}
@@ -840,7 +878,183 @@ int check_number_file(score* scor, int number)
 	return -1;
 }
 
-void statistics(string* temp, score* scor)
+void cout_class(all_class0* a_c_0)
 {
-	
-}    
+	cout << "1.班级平均成绩" << endl;
+	cout << "2.班级课程分数等级统计" << endl;
+	int select = 0;
+	cin >> select;
+	switch (select)
+	{
+	case 1:
+		cout_ave(a_c_0);
+		break;
+
+	case 2:
+		print(a_c_0);
+		break;
+
+	default:
+		break;
+	}
+}
+
+void cout_ave(all_class0* a_c_0)
+{
+	for (int i = 0; i < a_c_0->size; i++)
+	{
+		a_c_0->o_c_0[i].high_math_ave = a_c_0->o_c_0[i].high_math_sum / (a_c_0->o_c_0[i].size * 1.0);
+		a_c_0->o_c_0[i].c_language_ave = a_c_0->o_c_0[i].c_language_sum / (a_c_0->o_c_0[i].size * 1.0);
+		a_c_0->o_c_0[i].english_ave = a_c_0->o_c_0[i].english_sum / (a_c_0->o_c_0[i].size * 1.0);
+	}
+
+	for (int j = 0; j < a_c_0->size; j++)
+	{
+		cout << "班级：" << a_c_0->o_c_0[j].clas << "   "
+			<< "高数平均分:" << a_c_0->o_c_0[j].high_math_ave<< "   "
+			<< "英语平均分:" << a_c_0->o_c_0[j].english_ave <<"   "
+			<<"c语言平均分"<< a_c_0->o_c_0[j].c_language_ave << "   "
+			<< endl;
+	}
+
+	system("pause");
+	system("cls");
+}
+
+void cout_abc(int i, int k, score* scor, all_class0* a_c_0)
+{
+	int num = 1;
+	judje(scor->s_c[k].high_math, num, i, a_c_0);
+	num = 2;
+	judje(scor->s_c[k].english, num, i, a_c_0);
+	num = 3;
+	judje(scor->s_c[k].english, num, i, a_c_0);
+}
+
+void judje(int score, int num, int i, all_class0* a_c_0)
+{
+	if (score >= 90)
+	{
+		if (num == 1)
+			a_c_0->o_c_0[i].a++;
+
+		else if (num == 2)
+			a_c_0->o_c_0[i].a2++;
+		else if (num == 3)
+			a_c_0->o_c_0[i].a3++;
+	}
+
+	else if (score < 90 && score >= 80)
+	{
+		if (num == 1)
+			a_c_0->o_c_0[i].b++;
+
+		else if (num == 2)
+			a_c_0->o_c_0[i].b2++;
+
+		else if (num == 3)
+			a_c_0->o_c_0[i].b3++;
+	}
+
+	else if (score < 80 && score >= 70)
+	{
+		if (num == 1)
+			a_c_0->o_c_0[i].c++;
+
+		else if (num == 2)
+			a_c_0->o_c_0[i].c2++;
+
+		else if (num == 3)
+			a_c_0->o_c_0[i].c3++;
+	}
+
+	else if (score < 70 && score >= 60)
+	{
+		if (num == 1)
+			a_c_0->o_c_0[i].d++;
+
+		else if (num == 2)
+			a_c_0->o_c_0[i].d2++;
+
+		else if (num == 3)
+			a_c_0->o_c_0[i].d3++;
+	}
+
+	else if (score < 60)
+	{
+		if (num == 1)
+			a_c_0->o_c_0[i].e++;
+
+		else if (num == 2)
+			a_c_0->o_c_0[i].e2++;
+
+		else if (num == 3)
+			a_c_0->o_c_0[i].e3++;
+	}
+}
+
+void print(all_class0* a_c_0)
+{
+	cout << "请输入班级名称" << endl;
+	string clas;
+	cin >> clas;
+	int text = check_class(clas, a_c_0);
+
+	system("cls");
+
+	cout << "请输入要统计的科目:" << endl;
+	cout << "1.高数成绩" << endl;
+	cout << "2.英语成绩" << endl;
+	cout << "3.c语言成绩" << endl;
+	int select = 0;
+	cin >> select;
+
+	system("cls");
+
+	if (select == 1)
+	{
+		cout << "优秀:" << a_c_0->o_c_0[text].a << "   "
+			<< "良好:" << a_c_0->o_c_0[text].b << "   "
+			<< "中等:" << a_c_0->o_c_0[text].c << "   "
+			<< "及格:" << a_c_0->o_c_0[text].d << "   "
+			<< "不及格:" << a_c_0->o_c_0[text].e << "   "
+			<< endl;
+	}
+
+	else if (select == 2)
+	{
+		cout << "优秀:" << a_c_0->o_c_0[text].a2 << "   "
+			<< "良好:" << a_c_0->o_c_0[text].b2 << "   "
+			<< "中等:" << a_c_0->o_c_0[text].c2 << "   "
+			<< "及格:" << a_c_0->o_c_0[text].d2 << "   "
+			<< "不及格:" << a_c_0->o_c_0[text].e2 << "   "
+			<< endl;
+	}
+
+	else if (select == 3)
+	{
+		cout << "优秀:" << a_c_0->o_c_0[text].a3 << "   "
+			<< "良好:" << a_c_0->o_c_0[text].b3 << "   "
+			<< "中等:" << a_c_0->o_c_0[text].c3 << "   "
+			<< "及格:" << a_c_0->o_c_0[text].d3 << "   "
+			<< "不及格:" << a_c_0->o_c_0[text].e3 << "   "
+			<< endl;
+	}
+
+	system("pause");
+	system("cls");
+}
+
+int check_class(string clas, all_class0* a_c_0)
+{
+	for (int i = 0; i < a_c_0->size; i++)
+	{
+		if (a_c_0->o_c_0[i].clas == clas)
+		{
+			return i;
+		}
+	}
+
+	return -1;
+}
+
