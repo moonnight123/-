@@ -585,23 +585,21 @@ void delect_information1(information1* infor1)
 
 void look_information1(information1* infor1)
 {
-	int test = check_information1(infor1);
-	if (test == -1)
-	{
-		cout << "该学号不存在，请重新输入" << endl;
-	}
+	cout << "1.查询个人信息" << endl;
+	cout << "2.查询班级信息" << endl;
 
-	else
+	int select = 0;
+	cin >> select;
+
+	if (select == 1)
 	{
-		//个人信息输出
-		cout << "姓名:" << infor1->s_i_1[test].name << "   "
-			<< "性别:" << (infor1->s_i_1[test].sex == 1 ? "男" : "女") << "   "
-			<< "班级:" << infor1->s_i_1[test].clas << "   "
-			<< "专业:" << infor1->s_i_1[test].specialty << "   "
-			<< "学号:" << infor1->s_i_1[test].student_number << endl;
+		look_one_information(infor1);
 	}
-	system("pause");
-	system("cls");
+	
+	else if (select == 2)
+	{
+		look_class_information(infor1);
+	}
 }
 
 int check_person(score* scor, information1* infor1)
@@ -838,24 +836,20 @@ void delect_student(score* scor)
 
 void look_score(score* scor)
 {
-	int test = check_number(scor);
-	if (test == -1)
+	cout << "1.查询个人成绩" << endl;
+	cout << "2.查询班级成绩" << endl;
+
+	int select = 0;
+	cin >> select;
+	if (select == 1)
 	{
-		cout << "该学号不存在，请重新输入" << endl;
+		look_one_score(scor);
 	}
 
-	else {
-		cout << "姓名:" << scor->s_c[test].name << "   "
-			<< "学号:" << scor->s_c[test].student_number << "   "
-			<< "班级:" << scor->s_c[test].clas << "   "
-			<< "高数:" << scor->s_c[test].high_math << "   "
-			<< "英语:" << scor->s_c[test].english << "   "
-			<< "c语言:" << scor->s_c[test].c_language << "   "
-			<< "总成绩" << scor->s_c[test].sum_score << "   "
-			<< "校排名:" << scor->s_c[test].school_ranking << endl;
+	else if(select == 2)
+	{
+		look_class_score(scor);
 	}
-	system("pause");
-	system("cls");
 }
 
 void putout_score(score* scor)
@@ -1082,7 +1076,7 @@ void cout_abc(int i, int k, score* scor, all_class0* a_c_0)
 	num = 2;
 	judje(scor->s_c[k].english, num, i, a_c_0);
 	num = 3;
-	judje(scor->s_c[k].english, num, i, a_c_0);
+	judje(scor->s_c[k].c_language, num, i, a_c_0);
 }
 
 void judje(int score, int num, int i, all_class0* a_c_0)
@@ -1241,4 +1235,109 @@ void for_score(score* scor, int i, int j)
 	}
 
 	cout << "1.首页" << "   " << "2.目录" << "   " << "3.上一页" << "   " << "4.下一页" << "   " << "5.尾页" << endl;
+}
+
+void look_one_information(information1* infor1)
+{
+	int test = check_information1(infor1);
+	if (test == -1)
+	{
+		cout << "该学号不存在，请重新输入" << endl;
+	}
+
+	else
+	{
+		//个人信息输出
+		cout << "姓名:" << infor1->s_i_1[test].name << "   "
+			<< "性别:" << (infor1->s_i_1[test].sex == 1 ? "男" : "女") << "   "
+			<< "班级:" << infor1->s_i_1[test].clas << "   "
+			<< "专业:" << infor1->s_i_1[test].specialty << "   "
+			<< "学号:" << infor1->s_i_1[test].student_number << endl;
+	}
+	system("pause");
+	system("cls");
+}
+
+void look_class_information(information1* infor1)
+{
+	string clas = " ";
+	cout << "请输入班级：";
+	cin >> clas;
+	int test = 0;
+	for (int i = 0; i < infor1->size; i++)
+	{
+		if (infor1->s_i_1[i].clas == clas)
+		{
+			cout << "姓名:" << infor1->s_i_1[i].name << "   "
+				<< "性别:" << (infor1->s_i_1[i].sex == 1 ? "男" : "女") << "   "
+				<< "班级:" << infor1->s_i_1[i].clas << "   "
+				<< "专业:" << infor1->s_i_1[i].specialty << "   "
+				<< "学号:" << infor1->s_i_1[i].student_number << endl;
+			test++;
+		}
+	}
+
+	if (test == 0)
+	{
+		cout << "该班级不存在" << endl;
+	}
+
+	system("pause");
+	system("cls");
+}
+
+void look_one_score(score* scor)
+{
+	int test = check_number(scor);
+	if (test == -1)
+	{
+		cout << "该学号不存在，请重新输入" << endl;
+	}
+
+	else {
+		cout << "姓名:" << scor->s_c[test].name << "   "
+			<< "学号:" << scor->s_c[test].student_number << "   "
+			<< "班级:" << scor->s_c[test].clas << "   "
+			<< "高数:" << scor->s_c[test].high_math << "   "
+			<< "英语:" << scor->s_c[test].english << "   "
+			<< "c语言:" << scor->s_c[test].c_language << "   "
+			<< "总成绩" << scor->s_c[test].sum_score << "   "
+			<< "班排名" << scor->s_c[test].class_ranking << "   "
+			<< "校排名:" << scor->s_c[test].school_ranking << endl;
+	}
+	system("pause");
+	system("cls");
+}
+
+void look_class_score(score* scor)
+{
+	string clas = " ";
+	cout << "请输入班级：";
+	cin >> clas;
+	int test = 0;
+
+	for (int i = 0; i < scor->size; i++)
+	{
+		if (scor->s_c[i].clas == clas)
+		{
+			cout << "姓名:" << scor->s_c[i].name << "   "
+				<< "学号:" << scor->s_c[i].student_number << "   "
+				<< "班级:" << scor->s_c[i].clas << "   "
+				<< "高数:" << scor->s_c[i].high_math << "   "
+				<< "英语:" << scor->s_c[i].english << "   "
+				<< "c语言:" << scor->s_c[i].c_language << "   "
+				<< "总成绩" << scor->s_c[i].sum_score << "   "
+				<< "班排名" << scor->s_c[i].class_ranking << "   "
+				<< "校排名:" << scor->s_c[i].school_ranking << endl;
+			test++;
+		}
+	}
+
+	if (test == 0)
+	{
+		cout << "该班级不存在" << endl;
+	}
+
+	system("pause");
+	system("cls");
 }

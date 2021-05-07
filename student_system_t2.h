@@ -44,3 +44,7 @@ void print(all_class* a_c);
 int check_class(string clas, all_class* a_c);
 void for_information(information2* infor2, int i, int j);
 void for_score(score2* scor2, int i, int j);
+void look_one_information2(information2* infor);
+void look_one_score2(score2* scor2);
+void look_class_information2(information2* infor2);
+void look_class_score2(score2* scor2);
