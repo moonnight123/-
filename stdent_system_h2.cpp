@@ -387,7 +387,7 @@ void input_information2(information2* infor2)
 
 	//生成随机的学号
 	long int student_number;
-	student_number = rand() % 10000 + 20190000;
+	student_number = infor2->size + 20190001;
 	infor2->s_i_2[infor2->size].student_number = student_number;
 
 	//
@@ -398,18 +398,93 @@ void input_information2(information2* infor2)
 
 void putout_information2(information2* infor2)
 {
-	for (int i = 0; i < infor2->size; i++)
+	for_information(infor2, 0, 10);
+	int num = 0;//页数
+
+	while (true)
 	{
-		//输出成绩
-		cout << "姓名:" << infor2->s_i_2[i].name << "   "
-			<< "性别:" << (infor2->s_i_2[i].sex == 1 ? "男" : "女") << "   "
-			<< "班级:" << infor2->s_i_2[i].clas << "   "
-			<< "专业:" << infor2->s_i_2[i].specialty << "   "
-			<< "研究方向:" << infor2->s_i_2[i].research_direction << "   "
-			<< "导师:" << infor2->s_i_2[i].tutor << "   "
-			<< "学号:" << infor2->s_i_2[i].student_number << endl;
+		int select = 0;
+		cin >> select;
+		system("cls");
+
+		switch (select)
+		{
+		case 1:
+		{
+			//首页
+			num = 0;
+			for_information(infor2, 0, 10);
+		}
+		break;
+		case 2:
+		{
+			//目录
+			goto GOBACK;
+		}
+		break;
+		case 3:
+		{
+			//上一页
+			if (num - 10 < 0)
+			{
+				cout << "已是首页" << endl;
+				system("pause");
+				system("cls");
+				for_information(infor2, 0, 10);
+			}
+
+			else if (num - 10 >= 0)
+			{
+				num = num - 10;
+				for_information(infor2, num, num + 10);
+			}
+		}
+		break;
+		case 4:
+			//下一页
+
+			if (num + 10 > infor2->size)
+			{
+				cout << "已是尾页" << endl;
+				system("pause");
+				system("cls");
+				for_information(infor2, num, infor2->size);
+			}
+
+			else if (num + 20 > infor2->size)
+			{
+				num = num + 10;
+				for_information(infor2, num, infor2->size);
+			}
+
+			else
+			{
+				num = num + 10;
+				for_information(infor2, num, num + 10);
+			}
+
+			break;
+		case 5:
+		{
+			//尾页
+			if (infor2->size % 10 == 0)
+			{
+				num = infor2->size - 10;
+			}
+
+			else if (infor2->size % 10 != 0)
+			{
+				num = infor2->size - (infor2->size % 10);
+			}
+			for_information(infor2, num, infor2->size);
+		}
+		break;
+		default:
+			break;
+		}
 	}
 
+GOBACK:
 	system("pause");
 	system("cls");
 }
@@ -803,17 +878,93 @@ void look_score(score2* scor2)
 
 void putout_score(score2* scor2)
 {
-	for (int i = 0; i < scor2->size; i++)
+	for_score(scor2, 0, 10);
+	int num = 0;//页数
+
+	while (true)
 	{
-		cout << "姓名:" << scor2->s_c_2[i].name << "   "
-			<< "学号:" << scor2->s_c_2[i].student_number << "   "
-			<< "班级:" << scor2->s_c_2[i].clas << "   "
-			<< "课程总成绩:" << scor2->s_c_2[i].all_class_score << "   "
-			<< "论文成绩:" << scor2->s_c_2[i].thesis << "   "
-			<< "总成绩" << scor2->s_c_2[i].sum_score << "   "
-			<< "班排名" << scor2->s_c_2[i].class_ranking << "   "
-			<< "校排名:" << scor2->s_c_2[i].school_ranking << endl;
+		int select = 0;
+		cin >> select;
+		system("cls");
+
+		switch (select)
+		{
+		case 1:
+		{
+			//首页
+			num = 0;
+			for_score(scor2, 0, 10);
+		}
+		break;
+		case 2:
+		{
+			//目录
+			goto GOBACK;
+		}
+		break;
+		case 3:
+		{
+			//上一页
+			if (num - 10 < 0)
+			{
+				cout << "已是首页" << endl;
+				system("pause");
+				system("cls");
+				for_score(scor2, 0, 10);
+			}
+
+			else if (num - 10 >= 0)
+			{
+				num = num - 10;
+				for_score(scor2, num, num + 10);
+			}
+		}
+		break;
+		case 4:
+			//下一页
+
+			if (num + 10 > scor2->size)
+			{
+				cout << "已是尾页" << endl;
+				system("pause");
+				system("cls");
+				for_score(scor2, num, scor2->size);
+			}
+
+			else if (num + 20 > scor2->size)
+			{
+				num = num + 10;
+				for_score(scor2, num, scor2->size);
+			}
+
+			else
+			{
+				num = num + 10;
+				for_score(scor2, num, num + 10);
+			}
+
+			break;
+		case 5:
+		{
+			//尾页
+			if (scor2->size % 10 == 0)
+			{
+				num = scor2->size - 10;
+			}
+
+			else if (scor2->size % 10 != 0)
+			{
+				num = scor2->size - (scor2->size % 10);
+			}
+			for_score(scor2, num, scor2->size);
+		}
+		break;
+		default:
+			break;
+		}
 	}
+
+GOBACK:
 	system("pause");
 	system("cls");
 }
@@ -1048,3 +1199,36 @@ int check_class(string clas, all_class* a_c)
 	return -1;
 }
 
+void for_information(information2* infor2, int i, int j)
+{
+	for (; i < j; i++)
+	{
+		//输出成绩
+		cout << "姓名:" << infor2->s_i_2[i].name << "   "
+			<< "性别:" << (infor2->s_i_2[i].sex == 1 ? "男" : "女") << "   "
+			<< "班级:" << infor2->s_i_2[i].clas << "   "
+			<< "专业:" << infor2->s_i_2[i].specialty << "   "
+			<< "研究方向:" << infor2->s_i_2[i].research_direction << "   "
+			<< "导师:" << infor2->s_i_2[i].tutor << "   "
+			<< "学号:" << infor2->s_i_2[i].student_number << endl;
+	}
+
+	cout << "1.首页" << "   " << "2.目录" << "   " << "3.上一页" << "   " << "4.下一页" << "   " << "5.尾页" << endl;
+}
+
+void for_score(score2* scor2, int i, int j)
+{
+	for (; i < j; i++)
+	{
+		cout << "姓名:" << scor2->s_c_2[i].name << "   "
+			<< "学号:" << scor2->s_c_2[i].student_number << "   "
+			<< "班级:" << scor2->s_c_2[i].clas << "   "
+			<< "课程总成绩:" << scor2->s_c_2[i].all_class_score << "   "
+			<< "论文成绩:" << scor2->s_c_2[i].thesis << "   "
+			<< "总成绩" << scor2->s_c_2[i].sum_score << "   "
+			<< "班排名" << scor2->s_c_2[i].class_ranking << "   "
+			<< "校排名:" << scor2->s_c_2[i].school_ranking << endl;
+	}
+
+	cout << "1.首页" << "   " << "2.目录" << "   " << "3.上一页" << "   " << "4.下一页" << "   " << "5.尾页" << endl;
+}
