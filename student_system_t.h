@@ -48,3 +48,5 @@ void look_one_information(information1* infor1);
 void look_class_information(information1* infor1);
 void look_one_score(score* scor);
 void look_class_score(score* scor);
+void look_the_bad_score_student(score* scor);
+void look_the_bad_score(score* scor,int i,int score);

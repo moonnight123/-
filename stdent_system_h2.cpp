@@ -858,6 +858,9 @@ void look_score(score2* scor2)
 
 	int select = 0;
 	cin >> select;
+
+	system("cls");
+
 	if (select == 1)
 	{
 		look_one_score2(scor2);
@@ -865,7 +868,26 @@ void look_score(score2* scor2)
 
 	else if (select == 2)
 	{
-		look_class_score2(scor2);
+		cout << "1.查询班级全体学生成绩" << endl;
+		cout << "2.查询班级课程不及格学生信息" << endl;
+
+		int choice = 0;
+		cin >> choice;
+
+		system("cls");
+
+		if (choice == 1)
+		{
+			look_class_score2(scor2);
+		}
+
+		else if (choice == 2)
+		{
+			look_the_bad_score_student(scor2);
+		}
+
+		system("pause");
+		system("cls");
 	}
 }
 
@@ -1331,3 +1353,60 @@ void look_class_score2(score2* scor2)
 	system("pause");
 	system("cls");
 }
+
+void look_the_bad_score_student(score2* scor2)
+{
+	string clas = " ";
+	cout << "请输入班级：";
+	cin >> clas;
+
+	cout << "请选择课程：" << endl;
+	cout << "1.总课程成绩" << endl;
+	cout << "2.论文成绩" << endl;
+
+	int select = 0;
+	cin >> select;
+
+	system("cls");
+
+	switch (select)
+	{
+	case 1:
+	{
+		for (int i = 0; i < scor2->size; i++)
+		{
+			if (scor2->s_c_2[i].clas == clas)
+				look_the_bad_score(scor2, i, scor2->s_c_2[i].all_class_score);
+		}
+	}
+	break;
+
+	case 2:
+	{
+		for (int i = 0; i < scor2->size; i++)
+		{
+			if (scor2->s_c_2[i].clas == clas)
+				look_the_bad_score(scor2, i, scor2->s_c_2[i].thesis);
+		}
+	}
+	break;
+	default:
+		break;
+	}
+}
+
+void look_the_bad_score(score2* scor2, int i, int score)
+{
+	if (score < 60)
+	{
+		cout << "姓名:" << scor2->s_c_2[i].name << "   "
+			<< "学号:" << scor2->s_c_2[i].student_number << "   "
+			<< "班级:" << scor2->s_c_2[i].clas << "   "
+			<< "课程总成绩:" << scor2->s_c_2[i].all_class_score << "   "
+			<< "论文成绩:" << scor2->s_c_2[i].thesis << "   "
+			<< "总成绩" << scor2->s_c_2[i].sum_score << "   "
+			<< "班排名" << scor2->s_c_2[i].class_ranking << "   "
+			<< "校排名:" << scor2->s_c_2[i].school_ranking << endl;
+	}
+}
+

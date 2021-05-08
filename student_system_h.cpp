@@ -841,6 +841,8 @@ void look_score(score* scor)
 
 	int select = 0;
 	cin >> select;
+
+	system("cls");
 	if (select == 1)
 	{
 		look_one_score(scor);
@@ -848,7 +850,26 @@ void look_score(score* scor)
 
 	else if(select == 2)
 	{
-		look_class_score(scor);
+		cout << "1.查询班级全体学生成绩" << endl;
+		cout << "2.查询班级课程不及格学生信息" << endl;
+
+		int choice = 0;
+		cin >> choice;
+
+		system("cls");
+
+		if (choice == 1)
+		{
+			look_class_score(scor);
+		}
+		
+		else if (choice == 2)
+		{
+			look_the_bad_score_student(scor);
+		}
+
+		system("pause");
+		system("cls");
 	}
 }
 
@@ -1340,4 +1361,70 @@ void look_class_score(score* scor)
 
 	system("pause");
 	system("cls");
+}
+
+void look_the_bad_score_student(score *scor)
+{
+	string clas = " ";
+	cout << "请输入班级：";
+	cin >> clas;
+
+	cout << "请选择课程：" << endl;
+	cout << "1.高数成绩" << endl;
+	cout << "2.英语成绩" << endl;
+	cout << "3.c语言成绩" << endl;
+
+	int select = 0;
+	cin >> select;
+
+	system("cls");
+
+	switch (select)
+	{
+	case 1:
+	{
+		for (int i = 0; i < scor->size; i++)
+		{
+			if(scor->s_c[i].clas == clas)
+				look_the_bad_score(scor, i, scor->s_c[i].high_math);
+		}
+	}
+		break;
+	case 2:
+	{
+		for (int i = 0; i < scor->size; i++)
+		{
+			if(scor->s_c[i].clas == clas)
+				look_the_bad_score(scor, i, scor->s_c[i].english);
+		}
+	}
+		break;
+	case 3:
+	{
+		for (int i = 0; i < scor->size; i++)
+		{
+			if(scor->s_c[i].clas == clas)
+				look_the_bad_score(scor, i, scor->s_c[i].c_language);
+		}
+	}
+		break;
+	default:
+		break;
+	}
+}
+
+void look_the_bad_score(score* scor,int i,int score)
+{
+		if (score < 60)
+		{
+			cout << "姓名:" << scor->s_c[i].name << "   "
+				<< "学号:" << scor->s_c[i].student_number << "   "
+				<< "班级:" << scor->s_c[i].clas << "   "
+				<< "高数:" << scor->s_c[i].high_math << "   "
+				<< "英语:" << scor->s_c[i].english << "   "
+				<< "c语言:" << scor->s_c[i].c_language << "   "
+				<< "总成绩" << scor->s_c[i].sum_score << "   "
+				<< "班排名" << scor->s_c[i].class_ranking << "   "
+				<< "校排名:" << scor->s_c[i].school_ranking << endl;
+		}
 }
