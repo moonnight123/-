@@ -5,9 +5,11 @@ int main(){
 	int select;
 	while (true)
 	{
-		cout << "1.本科生管理系统" << endl;
-		cout << "2.研究生管理系统" << endl;
-		cout << "3.退出系统" << endl;
+		cout << "\t\t\t\t*---------------------*--------------------*" << endl;
+		cout << "\t\t\t\t|            1.本科生管理系统              |" << endl;
+		cout << "\t\t\t\t*            2.研究生管理系统              *" << endl;
+		cout << "\t\t\t\t|            3.退出系统                    |" << endl;
+		cout << "\t\t\t\t*---------------------*--------------------*" << endl;
 		cin >> select;
 		system("cls");
 		switch (select)

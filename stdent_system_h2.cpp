@@ -3,7 +3,7 @@
 struct student_information2
 {
 	string name = " ";//姓名
-	int sex = 0;;//性别
+	int sex = 0;//性别
 	string clas = " ";//班级
 	string specialty = " ";//专业
 	string research_direction = " ";//研究方向
@@ -56,41 +56,28 @@ struct all_class
 int yan_student_system()
 {
 	int select1;
-
 	yan_putin_file(&infor2, &scor2);
-
 	while (true)
 	{
-		cout << "1.研究生信息管理系统" << endl;
-		cout << "2.研究生成绩管理系统" << endl;
-		cout << "3.将信息成绩输入表格" << endl;
-		cout << "4.退出学生管理系统" << endl;
-		cin >> select1;
-		system("cls");
+		cout << "\t\t\t\t*---------------------*--------------------*" << endl;
+		cout << "\t\t\t\t|           1.研究生信息管理系统           |" << endl;
+		cout << "\t\t\t\t|           2.研究生成绩管理系统           |" << endl;
+		cout << "\t\t\t\t|           3.将信息成绩输入表格           |" << endl;
+		cout << "\t\t\t\t|           4.退出学生管理系统             |" << endl;
+		cout << "\t\t\t\t*---------------------*--------------------*" << endl;
+		cin >> select1;system("cls");
 
 		if (select1 == 1)
-		{
 			yan_student_information_system();//研究生信息管理系统
-		}
-
+		
 		else if (select1 == 2)
-		{
 			yan_student_score_system();//研究生成绩管理系统
-		}
-
+		
 		else if (select1 == 3)
-		{
-			yan_putout_file();
-			//文件传输至excl表中
-		}
+			yan_putout_file();//文件传输至excl表中
 
-
-		else if (select1 == 4)
-		{
-			//退出研究生系统
-			system("pause");
-			return 0;
-		}
+		else if (select1 == 4)//退出研究生系统
+			system("pause");return 0;
 	}
 }
 
@@ -99,39 +86,34 @@ void yan_student_information_system()
 	int select2;
 	while (true)
 	{
-		cout << "1.学生基本信息输入 " << endl;
-		cout << "2.学生基本信息修改 " << endl;
-		cout << "3.删除学生基本资料 " << endl;
-		cout << "4.查询学生基本资料 " << endl;
-		cout << "5.输出学生基本资料 " << endl;
-		cout << "6.退出信息管理系统 " << endl;
+		cout << "\t\t\t\t*---------------------*--------------------*" << endl;
+		cout << "\t\t\t\t|            1.学生基本信息输入            |" << endl;
+		cout << "\t\t\t\t|            2.学生基本信息修改            |" << endl;
+		cout << "\t\t\t\t|            3.删除学生基本资料            |" << endl;
+		cout << "\t\t\t\t|            4.查询学生基本资料            |" << endl;
+		cout << "\t\t\t\t|            5.输出学生基本资料            | " << endl;
+		cout << "\t\t\t\t|            6.退出信息管理系统            | " << endl;
+		cout << "\t\t\t\t*---------------------*--------------------*" << endl;
 		cin >> select2;
 		system("cls");
 		if (select2 == 6)
-		{
 			break;
-		}
 		switch (select2)
 		{
 		case 1:
-			input_information2(&infor2);
-			//学生基本信息输入
+			input_information2(&infor2);//学生基本信息输入
 			break;
 		case 2:
-			change_information2(&infor2);
-			//学生基本信息修改
+			change_information2(&infor2);//学生基本信息修改
 			break;
 		case 3:
-			delect_information2(&infor2);
-			//删除学生基本资料
+			delect_information2(&infor2);//删除学生基本资料
 			break;
 		case 4:
-			look_information2(&infor2);
-			//查询学生基本资料
+			look_information2(&infor2);//查询学生基本资料
 			break;
 		case 5:
-			putout_information2(&infor2);
-			//输出学生基本资料
+			putout_information2(&infor2);//输出学生基本资料
 			break;
 		}
 	}
@@ -141,50 +123,43 @@ void yan_student_score_system()
 {
 	int select2;
 	string  arr[100];
-
 	while (true)
 	{
-		cout << "  1.学生成绩输入 " << endl;
-		cout << "  2.学生成绩计算和统计 " << endl;
-		cout << "  3.学生成绩修改 " << endl;
-		cout << "  4.学生成绩删除 " << endl;
-		cout << "  5.学生成绩查询 " << endl;
-		cout << "  6.学生成绩输出 " << endl;
-		cout << "7.学生成绩统计输出" << endl;
-		cout << "8.退出成绩管理系统 " << endl;
+		cout << "\t\t\t\t*---------------------*--------------------*" << endl;
+		cout << "\t\t\t\t|              1.学生成绩输入              |" << endl;
+		cout << "\t\t\t\t|              2.学生成绩计算和统计        |" << endl;
+		cout << "\t\t\t\t*              3.学生成绩修改              *" << endl;
+		cout << "\t\t\t\t|              4.学生成绩删除              |" << endl;
+		cout << "\t\t\t\t|              5.学生成绩查询              |" << endl;
+		cout << "\t\t\t\t*              6.学生成绩输出              *" << endl;
+		cout << "\t\t\t\t|              7.学生成绩统计输出          |" << endl;
+		cout << "\t\t\t\t|              8.退出成绩管理系统          |" << endl;
+		cout << "\t\t\t\t*---------------------*--------------------*" << endl;
 		cin >> select2;
 		system("cls");
 		if (select2 == 8)
-		{
 			break;
-		}
 		switch (select2)
 		{
 		case 1:
-			input_score(&scor2, &infor2);
-			//学生成绩输入
+			input_score(&scor2, &infor2);//学生成绩输入
 			break;
 		case 2:
-			class_management(&scor2, arr,&a_c);
-			//学生成绩计算
+			class_management(&scor2, arr,&a_c);//学生成绩计算
 			break;
 		case 3:
 		{
-			change_score(&scor2);
-			//学生成绩修改
+			change_score(&scor2);//学生成绩修改
 			break;
 		}
 		case 4:
-			delect_student(&scor2);
-			//学生成绩删除
+			delect_student(&scor2);//学生成绩删除
 			break;
 		case 5:
-			look_score(&scor2);
-			//学生成绩查询
+			look_score(&scor2);//学生成绩查询
 			break;
 		case 6:
-			putout_score(&scor2);
-			//学生成绩输出
+			putout_score(&scor2);//学生成绩输出
 			break;
 		case 7:
 			cout_class(&a_c);
@@ -211,9 +186,7 @@ void yan_putout_file()
 		int number = infor2.s_i_2[i].student_number;
 		int test = check_number_file(&scor2, number);
 		if (test == -1)
-		{
 			ofs << endl;
-		}
 
 		else {
 			ofs<< scor2.s_c_2[test].all_class_score << "\t"
@@ -223,7 +196,6 @@ void yan_putout_file()
 			<< scor2.s_c_2[test].school_ranking << "\t"
 			<< endl;
 		}
-		  
 	}
 	ofs.close();
 	cout << "输入成功！" << endl;
@@ -237,11 +209,7 @@ void yan_putin_file(information2* infor2, score2* scor2)
 	ifs.open("C:\\Users\\pqy18770657781\\Desktop\\vs2019\\student score system\\student score system\\研究生成绩管理系统.xls", ios::in);
 	char buf[1024] = { 0 };
 	for (int i = 0; i < 12; i++)
-	{
 		ifs >> buf;
-	}
-
-
 	while (ifs >> buf)
 	{
 		for (int i = 1; i < 13; i++)
@@ -265,15 +233,12 @@ void yan_putin_file(information2* infor2, score2* scor2)
 			else if (i == 3)
 			{
 				int sex = 0;
+
 				if (buf ==(string) "男")
-				{
 					sex = 1;
-				}
 
 				else if(buf == (string)"女")
-				{
 					sex = 2;
-				}
 
 				infor2->s_i_2[infor2->size].sex = sex;
 				ifs >> buf;
@@ -343,57 +308,69 @@ void yan_putin_file(information2* infor2, score2* scor2)
 				scor2->s_c_2[scor2->size].school_ranking = school_ranking;
 			}
 		}
-
 		infor2->size++;
 		scor2->size++;
 	}
-
 	ifs.close();
 }
 
 void input_information2(information2* infor2)
 {
-	cout << "请输入姓名:" << endl;
-	string name;
-	cin >> name;
-	infor2->s_i_2[infor2->size].name = name;
+		cout << "请输入姓名:" << endl;
+		string name;
+		cin >> name;
+		infor2->s_i_2[infor2->size].name = name;
 
-	cout << "请输入性别:" << endl;
-	cout << "1-男" << endl;
-	cout << "2-女" << endl;
-	int sex;
-	cin >> sex;
-	infor2->s_i_2[infor2->size].sex = sex;
+		int sex;
+		while (true)
+		{
+			cout << "请输入性别:" << endl;
+			cout << "1-男" << endl;
+			cout << "2-女" << endl;
+			try
+			{
+				cin >> sex;
+				if (sex == 1 || sex == 2)
+					break;
+				if (isdigit(sex) == 0)
+					throw 'a';
+				else if (sex > 2 && sex < 1)
+					throw - 1;
+			}
+			catch (...)
+			{
+				cout << "请输入数字1或2" << endl;
+				system("pause");
+				system("cls");
+			}
+		}
 
-	cout << "请输入班级:" << endl;
-	string clas;
-	cin >> clas;
-	infor2->s_i_2[infor2->size].clas = clas;
+		
+		infor2->s_i_2[infor2->size].sex = sex;
 
-	cout << "请输入专业:" << endl;
-	string specialty;
-	cin >> specialty;
-	infor2->s_i_2[infor2->size].specialty = specialty;
+		cout << "请输入班级:" << endl;
+		string clas; cin >> clas;
+		infor2->s_i_2[infor2->size].clas = clas;
 
-	cout << "请输入研究方向：" << endl;
-	string research_direction;
-	cin >> research_direction;
-	infor2->s_i_2[infor2->size].research_direction = research_direction;
+		cout << "请输入专业:" << endl;
+		string specialty; cin >> specialty;
+		infor2->s_i_2[infor2->size].specialty = specialty;
 
-	cout << "请输入导师姓名：" << endl;
-	string tutor;
-	cin >> tutor;
-	infor2->s_i_2[infor2->size].tutor = tutor;
+		cout << "请输入研究方向：" << endl;
+		string research_direction; cin >> research_direction;
+		infor2->s_i_2[infor2->size].research_direction = research_direction;
 
-	//生成随机的学号
-	long int student_number;
-	student_number = infor2->size + 20190001;
-	infor2->s_i_2[infor2->size].student_number = student_number;
+		cout << "请输入导师姓名：" << endl;
+		string tutor; cin >> tutor;
+		infor2->s_i_2[infor2->size].tutor = tutor;
 
-	//
-	infor2->size++;
+		//生成随机的学号
+		long int student_number;
+		student_number = infor2->size + 20190001;
+		infor2->s_i_2[infor2->size].student_number = student_number;
 
-	system("cls");
+		infor2->size++;
+		system("cls");
 }
 
 void putout_information2(information2* infor2)
@@ -516,14 +493,15 @@ void change_information2(information2* infor2)
 
 	else
 	{
-		cout << "请输入修改信息：" << endl;
-		cout << "1.姓名" << endl;
-		cout << "2.性别" << endl;
-		cout << "3.班级" << endl;
-		cout << "4.专业" << endl;
-		cout << "5.研究方向" << endl;
-		cout << "6.导师" << endl;
-
+		cout << "\t\t\t\t*---------------------*--------------------*" << endl;
+		cout << "\t\t\t\t|               请输入修改信息：           |" << endl;
+		cout << "\t\t\t\t|                  1.姓名                  |" << endl;
+		cout << "\t\t\t\t|                  2.性别                  |" << endl;
+		cout << "\t\t\t\t|                  3.班级                  |" << endl;
+		cout << "\t\t\t\t|                  4.专业                  |" << endl;
+		cout << "\t\t\t\t|                5.研究方向                |" << endl;
+		cout << "\t\t\t\t|                  6.导师                  |" << endl;
+		cout << "\t\t\t\t*---------------------*--------------------*" << endl;
 		int select;
 		cin >> select;
 		switch (select)
@@ -610,9 +588,10 @@ void delect_information2(information2* infor2)
 
 void look_information2(information2* infor2)
 {
-	cout << "1.查询个人信息" << endl;
-	cout << "2.查询班级信息" << endl;
-
+	cout << "\t\t\t\t*---------------------*--------------------*" << endl;
+	cout << "\t\t\t\t|              1.查询个人信息              |" << endl;
+	cout << "\t\t\t\t|              2.查询班级信息              |" << endl;
+	cout << "\t\t\t\t*---------------------*--------------------*" << endl;
 	int select = 0;
 	cin >> select;
 
@@ -678,13 +657,13 @@ void input_score(score2* scor2, information2* infor2)
 
 
 		cout << "课程总成绩成绩：" << endl;
-		int all_class_score;
-		cin >> all_class_score;
+		int all_class_score = 0;
+		all_class_score = judje_score(all_class_score);
 		scor2->s_c_2[scor2->size].all_class_score = all_class_score;
 
 		cout << "论文成绩：" << endl;
-		int thesis;
-		cin >> thesis;
+		int thesis = 0;
+		thesis = judje_score(thesis);
 		scor2->s_c_2[scor2->size].thesis = thesis;
 
 		//计算总成绩
@@ -757,12 +736,14 @@ void change_score(score2* scor2)
 	{
 		while (true)
 		{
-			cout << "请输入修改信息：" << endl;
-			cout << "1.姓名" << endl;
-			cout << "2.班级" << endl;
-			cout << "3.课程总成绩成绩" << endl;
-			cout << "4.论文成绩" << endl;
-			cout << "6.退出修改" << endl;
+			cout << "\t\t\t\t*---------------------*--------------------*" << endl;
+			cout << "\t\t\t\t|              请输入修改信息：            |" << endl;
+			cout << "\t\t\t\t|                  1.姓名                  |" << endl;
+			cout << "\t\t\t\t|                  2.班级                  |" << endl;
+			cout << "\t\t\t\t|               3.课程总成绩               |" << endl;
+			cout << "\t\t\t\t|                4.论文成绩                |" << endl;
+			cout << "\t\t\t\t|                6.退出修改                |" << endl;
+			cout << "\t\t\t\t*---------------------*--------------------*" << endl;
 
 			int select;
 			cin >> select;
@@ -838,7 +819,7 @@ void delect_student(score2* scor2)
 
 	else
 	{
-		//通过将后一位学生的信息成绩前一位学生的信息的方法实现学生成绩的删除
+		//通过将后一位学生的信息成绩覆盖前一位学生的信息的方法实现学生成绩的删除
 		for (int i = test; i < scor2->size + 1; i++)
 		{
 			scor2->s_c_2[i] = scor2->s_c_2[i + 1];
@@ -853,8 +834,10 @@ void delect_student(score2* scor2)
 
 void look_score(score2* scor2)
 {
-	cout << "1.查询个人成绩" << endl;
-	cout << "2.查询班级成绩" << endl;
+	cout << "\t\t\t\t*---------------------*--------------------*" << endl;
+	cout << "\t\t\t\t|             1.查询个人成绩               |" << endl;
+	cout << "\t\t\t\t|             2.查询班级成绩               |" << endl;
+	cout << "\t\t\t\t*---------------------*--------------------*" << endl;
 
 	int select = 0;
 	cin >> select;
@@ -868,8 +851,10 @@ void look_score(score2* scor2)
 
 	else if (select == 2)
 	{
-		cout << "1.查询班级全体学生成绩" << endl;
-		cout << "2.查询班级课程不及格学生信息" << endl;
+		cout << "\t\t\t\t*---------------------*--------------------*" << endl;
+		cout << "\t\t\t\t|            1.查询班级全体学生成绩        |" << endl;
+		cout << "\t\t\t\t|          2.查询班级课程不及格学生信息    |" << endl;
+		cout << "\t\t\t\t*---------------------*--------------------*" << endl;
 
 		int choice = 0;
 		cin >> choice;
@@ -1067,8 +1052,10 @@ int check_number_file(score2* scor2, int number)
 
 void cout_class(all_class* a_c)
 {
-	cout << "1.班级平均成绩" << endl;
-	cout << "2.班级课程分数等级统计" << endl;
+	cout << "\t\t\t\t*---------------------*--------------------*" << endl;
+	cout << "\t\t\t\t|              1.班级平均成绩              |" << endl;
+	cout << "\t\t\t\t|           2.班级课程分数等级统计         |" << endl;
+	cout << "\t\t\t\t*---------------------*--------------------*" << endl;
 	int select = 0;
 	cin >> select;
 	switch (select)
@@ -1170,9 +1157,11 @@ void print(all_class *a_c)
 
 	system("cls");
 
-	cout << "请输入要统计的科目:" << endl;
-	cout << "1.课程总成绩" << endl;
-	cout << "2.论文成绩" << endl;
+	cout << "\t\t\t\t*---------------------*--------------------*" << endl;
+	cout << "\t\t\t\t             请输入要统计的科目:		     " << endl;
+	cout << "\t\t\t\t               1.课程总成绩成绩			 " << endl;
+	cout << "\t\t\t\t                 2.论文成绩				 " << endl;
+	cout << "\t\t\t\t*---------------------*--------------------*" << endl;
 	int select = 0;
 	cin >> select;
 
@@ -1219,12 +1208,12 @@ void for_information(information2* infor2, int i, int j)
 	for (; i < j; i++)
 	{
 		//输出成绩
-		cout << "姓名:" << infor2->s_i_2[i].name << "   "
-			<< "性别:" << (infor2->s_i_2[i].sex == 1 ? "男" : "女") << "   "
-			<< "班级:" << infor2->s_i_2[i].clas << "   "
-			<< "专业:" << infor2->s_i_2[i].specialty << "   "
-			<< "研究方向:" << infor2->s_i_2[i].research_direction << "   "
-			<< "导师:" << infor2->s_i_2[i].tutor << "   "
+		cout<< "姓名:" << infor2->s_i_2[i].name<<"    \t"
+			<< "性别:" << (infor2->s_i_2[i].sex == 1 ? "男" : "女") << "    \t"
+			<< "班级:" << infor2->s_i_2[i].clas << "    \t"
+			<< "专业:" << infor2->s_i_2[i].specialty << "    \t"
+			<< "研究方向:" << infor2->s_i_2[i].research_direction << "    \t"
+			<< "导师:" << infor2->s_i_2[i].tutor << "    \t"
 			<< "学号:" << infor2->s_i_2[i].student_number << endl;
 	}
 
@@ -1235,13 +1224,13 @@ void for_score(score2* scor2, int i, int j)
 {
 	for (; i < j; i++)
 	{
-		cout << "姓名:" << scor2->s_c_2[i].name << "   "
-			<< "学号:" << scor2->s_c_2[i].student_number << "   "
-			<< "班级:" << scor2->s_c_2[i].clas << "   "
-			<< "课程总成绩:" << scor2->s_c_2[i].all_class_score << "   "
-			<< "论文成绩:" << scor2->s_c_2[i].thesis << "   "
+		cout << "姓名:" << scor2->s_c_2[i].name << "\t"
+			<< "学号:" << scor2->s_c_2[i].student_number << "\t"
+			<< "班级:" << scor2->s_c_2[i].clas << "\t"
+			<< "课程总成绩:" << scor2->s_c_2[i].all_class_score << "\t"
+			<< "论文成绩:" << scor2->s_c_2[i].thesis << "\t"
 			<< "总成绩" << scor2->s_c_2[i].sum_score << "   "
-			<< "班排名" << scor2->s_c_2[i].class_ranking << "   "
+			<< "班排名" << scor2->s_c_2[i].class_ranking << "\t"
 			<< "校排名:" << scor2->s_c_2[i].school_ranking << endl;
 	}
 
@@ -1259,12 +1248,12 @@ void look_one_information2(information2* infor2)
 	else
 	{
 		//个人信息输出
-		cout << "姓名:" << infor2->s_i_2[test].name << "   "
-			<< "性别:" << (infor2->s_i_2[test].sex == 1 ? "男" : "女") << "   "
-			<< "班级:" << infor2->s_i_2[test].clas << "   "
-			<< "专业:" << infor2->s_i_2[test].specialty << "   "
-			<< "研究方向:" << infor2->s_i_2[test].research_direction << "   "
-			<< "导师:" << infor2->s_i_2[test].tutor << "   "
+		cout << "姓名:" << infor2->s_i_2[test].name << "    \t"
+			<< "性别:" << (infor2->s_i_2[test].sex == 1 ? "男" : "女") << "    \t"
+			<< "班级:" << infor2->s_i_2[test].clas << "    \t"
+			<< "专业:" << infor2->s_i_2[test].specialty << "    \t"
+			<< "研究方向:" << infor2->s_i_2[test].research_direction << "    \t"
+			<< "导师:" << infor2->s_i_2[test].tutor << "    \t"
 			<< "学号:" << infor2->s_i_2[test].student_number << endl;
 	}
 	system("pause");
@@ -1280,12 +1269,12 @@ void look_one_score2(score2* scor2)
 	}
 
 	else {
-		cout << "姓名:" << scor2->s_c_2[test].name << "   "
-			<< "学号:" << scor2->s_c_2[test].student_number << "   "
-			<< "班级:" << scor2->s_c_2[test].clas << "   "
-			<< "课程总成绩:" << scor2->s_c_2[test].all_class_score << "   "
-			<< "论文成绩:" << scor2->s_c_2[test].thesis << "   "
-			<< "总成绩" << scor2->s_c_2[test].sum_score << "   "
+		cout << "姓名:" << scor2->s_c_2[test].name << "    \t"
+			<< "学号:" << scor2->s_c_2[test].student_number << "    \t"
+			<< "班级:" << scor2->s_c_2[test].clas << "    \t"
+			<< "课程总成绩:" << scor2->s_c_2[test].all_class_score << "    \t"
+			<< "论文成绩:" << scor2->s_c_2[test].thesis << "    \t"
+			<< "总成绩" << scor2->s_c_2[test].sum_score << "    \t"
 			<< "校排名:" << scor2->s_c_2[test].school_ranking << endl;
 	}
 	system("pause");
@@ -1302,12 +1291,12 @@ void look_class_information2(information2* infor2)
 	{
 		if (infor2->s_i_2[i].clas == clas)
 		{
-			cout << "姓名:" << infor2->s_i_2[i].name << "   "
-				<< "性别:" << (infor2->s_i_2[i].sex == 1 ? "男" : "女") << "   "
-				<< "班级:" << infor2->s_i_2[i].clas << "   "
-				<< "专业:" << infor2->s_i_2[i].specialty << "   "
-				<< "研究方向:" << infor2->s_i_2[i].research_direction << "   "
-				<< "导师:" << infor2->s_i_2[i].tutor << "   "
+			cout << "姓名:" << infor2->s_i_2[i].name << "    \t"
+				<< "性别:" << (infor2->s_i_2[i].sex == 1 ? "男" : "女") << "    \t"
+				<< "班级:" << infor2->s_i_2[i].clas << "    \t"
+				<< "专业:" << infor2->s_i_2[i].specialty << "    \t"
+				<< "研究方向:" << infor2->s_i_2[i].research_direction << "    \t"
+				<< "导师:" << infor2->s_i_2[i].tutor << "    \t"
 				<< "学号:" << infor2->s_i_2[i].student_number << endl;
 			test++;
 		}
@@ -1333,13 +1322,13 @@ void look_class_score2(score2* scor2)
 	{
 		if (scor2->s_c_2[i].clas == clas)
 		{
-			cout << "姓名:" << scor2->s_c_2[i].name << "   "
-				<< "学号:" << scor2->s_c_2[i].student_number << "   "
-				<< "班级:" << scor2->s_c_2[i].clas << "   "
-				<< "课程总成绩:" << scor2->s_c_2[i].all_class_score << "   "
-				<< "论文成绩:" << scor2->s_c_2[i].thesis << "   "
-				<< "总成绩" << scor2->s_c_2[i].sum_score << "   "
-				<< "班排名" << scor2->s_c_2[i].class_ranking << "   "
+			cout << "姓名:" << scor2->s_c_2[i].name << "    \t"
+				<< "学号:" << scor2->s_c_2[i].student_number << "    \t"
+				<< "班级:" << scor2->s_c_2[i].clas << "    \t"
+				<< "课程总成绩:" << scor2->s_c_2[i].all_class_score << "    \t"
+				<< "论文成绩:" << scor2->s_c_2[i].thesis << "    \t"
+				<< "总成绩" << scor2->s_c_2[i].sum_score << "    \t"
+				<< "班排名" << scor2->s_c_2[i].class_ranking << "    \t"
 				<< "校排名:" << scor2->s_c_2[i].school_ranking << endl;
 			test++;
 		}
@@ -1359,10 +1348,12 @@ void look_the_bad_score_student(score2* scor2)
 	string clas = " ";
 	cout << "请输入班级：";
 	cin >> clas;
-
-	cout << "请选择课程：" << endl;
-	cout << "1.总课程成绩" << endl;
-	cout << "2.论文成绩" << endl;
+	system("cls");
+	cout << "\t\t\t\t*---------------------*--------------------*" << endl;
+	cout << "\t\t\t\t|             请选择课程成绩：             |" << endl;
+	cout << "\t\t\t\t|              1.课程总成绩                |" << endl;
+	cout << "\t\t\t\t|               2.论文成绩                 |" << endl;
+	cout << "\t\t\t\t*---------------------*--------------------*" << endl;
 
 	int select = 0;
 	cin >> select;
@@ -1410,3 +1401,19 @@ void look_the_bad_score(score2* scor2, int i, int score)
 	}
 }
 
+int judje_score(int num)
+{
+	while (true)
+	{
+		cin >>num;
+		if (num >= -1 && num <= 100)
+		{
+			return num;
+			break;
+		}
+
+		else
+			cout << "分数的范围为0-100\r" << endl;
+	}
+	
+}

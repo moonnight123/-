@@ -64,10 +64,12 @@ int ben_student_system()
 
 	while (true)
 	{
-		cout << "1.本科生信息管理系统" << endl;
-		cout << "2.本科生成绩管理系统" << endl;
-		cout << "3.将信息成绩输入表格" << endl;
-		cout << "4.退出学生管理系统" << endl;
+		cout << "\t\t\t\t*---------------------*--------------------*" << endl;
+		cout << "\t\t\t\t|            1.本科生信息管理系统          |" << endl;
+		cout << "\t\t\t\t|            2.本科生成绩管理系统          |" << endl;
+		cout << "\t\t\t\t|            3.将信息成绩输入表格          |" << endl;
+		cout << "\t\t\t\t|             4.退出学生管理系统           |" << endl;
+		cout << "\t\t\t\t*---------------------*--------------------*" << endl;
 		cin >> select1;
 		system("cls");
 
@@ -103,12 +105,14 @@ void ben_student_information_system()
 	int select2;
 	while (true)
 	{
-		cout << "1.学生基本信息输入 " << endl;
-		cout << "2.学生基本信息修改 " << endl;
-		cout << "3.删除学生基本资料 " << endl;
-		cout << "4.查询学生基本资料 " << endl;
-		cout << "5.输出学生基本资料 " << endl;
-		cout << "6.退出信息管理系统 " << endl;
+		cout << "\t\t\t\t*---------------------*--------------------*" << endl;
+		cout << "\t\t\t\t|            1.学生基本信息输入            |" << endl;
+		cout << "\t\t\t\t|            2.学生基本信息修改            |" << endl;
+		cout << "\t\t\t\t|            3.删除学生基本资料            |" << endl;
+		cout << "\t\t\t\t|            4.查询学生基本资料            |" << endl;
+		cout << "\t\t\t\t|            5.输出学生基本资料            |" << endl;
+		cout << "\t\t\t\t|            6.退出信息管理系统            |" << endl;
+		cout << "\t\t\t\t*---------------------*--------------------*" << endl;
 		cin >> select2;
 		system("cls");
 		if (select2 == 6)
@@ -149,14 +153,16 @@ void ben_student_score_system()
 	//本科生成绩管理系统
 	while (true)
 	{
-		cout << "  1.学生成绩输入 " << endl;
-		cout << "  2.学生成绩计算 " << endl;
-		cout << "  3.学生成绩修改 " << endl;
-		cout << "  4.学生成绩删除 " << endl;
-		cout << "  5.学生成绩查询 " << endl;
-		cout << "  6.学生成绩输出 " << endl;
-		cout << "7.学生成绩统计输出" << endl;
-		cout << "8.退出成绩管理系统 " << endl;
+		cout << "\t\t\t\t*---------------------*--------------------*" << endl;
+		cout << "\t\t\t\t|              1.学生成绩输入              |" << endl;
+		cout << "\t\t\t\t|              2.学生成绩计算              |" << endl;
+		cout << "\t\t\t\t*              3.学生成绩修改              *" << endl;
+		cout << "\t\t\t\t|              4.学生成绩删除              |" << endl;
+		cout << "\t\t\t\t|              5.学生成绩查询              |" << endl;
+		cout << "\t\t\t\t*              6.学生成绩输出              *" << endl;
+		cout << "\t\t\t\t|            7.学生成绩统计输出            |" << endl;
+		cout << "\t\t\t\t|            8.退出成绩管理系统            |" << endl;
+		cout << "\t\t\t\t*---------------------*--------------------*" << endl;
 		cin >> select2;
 		system("cls");
 		if (select2 == 8)
@@ -357,24 +363,80 @@ void input_information1(information1* infor1)
 {
 	cout << "请输入姓名:" << endl;
 	string name;
-	cin >> name;
+
+	while (true)
+	{
+		cin >> name;
+
+		if (typeid(name) == typeid(string))
+		{
+			break;
+		}
+
+		else
+		{
+			cout << "请重新输入\r";
+		}
+
+	}
+	
 	infor1->s_i_1[infor1->size].name = name;
 
 	cout << "请输入性别:" << endl;
 	cout << "1-男" << endl;
 	cout << "2-女" << endl;
 	int sex;
-	cin >> sex;
+	
+	while (true)
+	{
+		cin >> sex;
+		if (typeid(sex) == typeid(int))
+		{
+			break;
+		}
+
+		else
+		{
+			cout << "请重新输入" << endl;
+		}
+	}
 	infor1->s_i_1[infor1->size].sex = sex;
 
 	cout << "请输入班级:" << endl;
 	string clas;
-	cin >> clas;
+	
+	while (true)
+	{
+		cin >> clas;
+		if (typeid(clas) == typeid(string))
+		{
+			break;
+		}
+
+		else
+		{
+			cout << "请重新输入\r";
+		}
+	}
+
 	infor1->s_i_1[infor1->size].clas = clas;
 
 	cout << "请输入专业:" << endl;
 	string specialty;
-	cin >> specialty;
+	
+	while (true)
+	{
+		cin >> specialty;
+		if (typeid(specialty) == typeid(string))
+		{
+			break;
+		}
+
+		else
+		{
+			cout << "请重新输入\r" ;
+		}
+	}
 	infor1->s_i_1[infor1->size].specialty = specialty;
 
 	//学号的自动生成
@@ -509,12 +571,13 @@ void change_information1(information1* infor1)
 
 	else
 	{
-		cout << "请输入修改信息：" << endl;
-		cout << "1.姓名" << endl;
-		cout << "2.性别" << endl;
-		cout << "3.班级" << endl;
-		cout << "4.专业" << endl;
-
+		cout << "\t\t\t\t*---------------------*--------------------*" << endl;
+		cout << "\t\t\t\t|               请输入修改信息：           |" << endl;
+		cout << "\t\t\t\t|                  1.姓名                  |" << endl;
+		cout << "\t\t\t\t|                  2.性别                  |" << endl;
+		cout << "\t\t\t\t|                  3.班级                  |" << endl;
+		cout << "\t\t\t\t|                  4.专业                  |" << endl;
+		cout << "\t\t\t\t*---------------------*--------------------*" << endl;
 		int select;
 		cin >> select;
 		switch (select)
@@ -585,8 +648,10 @@ void delect_information1(information1* infor1)
 
 void look_information1(information1* infor1)
 {
-	cout << "1.查询个人信息" << endl;
-	cout << "2.查询班级信息" << endl;
+	cout << "\t\t\t\t*---------------------*--------------------*" << endl;
+	cout << "\t\t\t\t|              1.查询个人信息              |"<< endl;
+	cout << "\t\t\t\t|              2.查询班级信息              |" << endl;
+	cout << "\t\t\t\t*---------------------*--------------------*" << endl;
 
 	int select = 0;
 	cin >> select;
@@ -734,14 +799,15 @@ void change_score(score* scor)
 	{
 		while (true)
 		{
-			cout << "请输入修改信息：" << endl;
-			cout << "1.姓名" << endl;
-			cout << "2.班级" << endl;
-			cout << "3.高数成绩" << endl;
-			cout << "4.英语成绩" << endl;
-			cout << "5.c语言成绩" << endl;
-			cout << "6.退出修改" << endl;
-
+			cout << "\t\t\t\t*---------------------*--------------------*" << endl;
+			cout << "\t\t\t\t|              请输入修改信息：            |" << endl;
+			cout << "\t\t\t\t|                  1.姓名                  |" << endl;
+			cout << "\t\t\t\t|                  2.班级                  |" << endl;
+			cout << "\t\t\t\t|                3.高数成绩                |" << endl;
+			cout << "\t\t\t\t|                4.英语成绩                |" << endl;
+			cout << "\t\t\t\t|                5.c语言成绩               |" << endl;
+			cout << "\t\t\t\t|                6.退出修改                |" << endl;
+			cout << "\t\t\t\t*---------------------*--------------------*" << endl;
 			int select;
 			cin >> select;
 			if (select == 6)
@@ -836,9 +902,10 @@ void delect_student(score* scor)
 
 void look_score(score* scor)
 {
-	cout << "1.查询个人成绩" << endl;
-	cout << "2.查询班级成绩" << endl;
-
+	cout << "\t\t\t\t*---------------------*--------------------*" << endl;
+	cout << "\t\t\t\t|             1.查询个人成绩               |" << endl;
+	cout << "\t\t\t\t|             2.查询班级成绩               |" << endl;
+	cout << "\t\t\t\t*---------------------*--------------------*" << endl;
 	int select = 0;
 	cin >> select;
 
@@ -850,9 +917,10 @@ void look_score(score* scor)
 
 	else if(select == 2)
 	{
-		cout << "1.查询班级全体学生成绩" << endl;
-		cout << "2.查询班级课程不及格学生信息" << endl;
-
+		cout << "\t\t\t\t*---------------------*--------------------*" << endl;
+		cout << "\t\t\t\t|            1.查询班级全体学生成绩        |" << endl;
+		cout << "\t\t\t\t|          2.查询班级课程不及格学生信息    |" << endl;
+		cout << "\t\t\t\t*---------------------*--------------------*" << endl;
 		int choice = 0;
 		cin >> choice;
 
@@ -1049,8 +1117,10 @@ int check_number_file(score* scor, int number)
 
 void cout_class(all_class0* a_c_0)
 {
-	cout << "1.班级平均成绩" << endl;
-	cout << "2.班级课程分数等级统计" << endl;
+	cout << "\t\t\t\t*---------------------*--------------------*" << endl;
+	cout << "\t\t\t\t|               1.班级平均成绩             |" << endl;
+	cout << "\t\t\t\t|            2.班级课程分数等级统计        |" << endl;
+	cout << "\t\t\t\t*---------------------*--------------------*" << endl;
 	int select = 0;
 	cin >> select;
 	switch (select)
@@ -1170,11 +1240,12 @@ void print(all_class0* a_c_0)
 	int text = check_class(clas, a_c_0);
 
 	system("cls");
-
-	cout << "请输入要统计的科目:" << endl;
-	cout << "1.高数成绩" << endl;
-	cout << "2.英语成绩" << endl;
-	cout << "3.c语言成绩" << endl;
+	cout << "\t\t\t\t*---------------------*--------------------*" << endl;
+	cout << "\t\t\t\t             请输入要统计的科目:		    " << endl;
+	cout << "\t\t\t\t                 1.高数成绩				" << endl;
+	cout << "\t\t\t\t                 2.英语成绩				" << endl;
+	cout << "\t\t\t\t                 3.c语言成绩               " << endl;
+	cout << "\t\t\t\t*---------------------*--------------------*" << endl;
 	int select = 0;
 	cin >> select;
 
@@ -1231,10 +1302,10 @@ void for_information(information1* infor1, int i,int j)
 {
 	for (; i < j; i++)
 	{
-		cout << "姓名:" << infor1->s_i_1[i].name << "   "
-			<< "性别:" << (infor1->s_i_1[i].sex == 1 ? "男" : "女") << "   "
-			<< "班级:" << infor1->s_i_1[i].clas << "   "
-			<< "专业:" << infor1->s_i_1[i].specialty << "   "
+		cout << "姓名:" << infor1->s_i_1[i].name << "   \t"
+			<< "性别:" << (infor1->s_i_1[i].sex == 1 ? "男" : "女") << "   \t"
+			<< "班级:" << infor1->s_i_1[i].clas << "   \t"
+			<< "专业:" << infor1->s_i_1[i].specialty << "   \t"
 			<< "学号:" << infor1->s_i_1[i].student_number << endl;
 	}
 	cout << "1.首页" <<"   "<< "2.目录" << "   " << "3.上一页" << "   " << "4.下一页" << "   " << "5.尾页" << endl;
@@ -1244,14 +1315,14 @@ void for_score(score* scor, int i, int j)
 {
 	for (; i < j; i++)
 	{
-		cout << "姓名:" << scor->s_c[i].name << "   "
+		cout << "姓名:" << scor->s_c[i].name << "\t"
 			<< "学号:" << scor->s_c[i].student_number << "   "
-			<< "班级:" << scor->s_c[i].clas << "   "
-			<< "高数:" << scor->s_c[i].high_math << "   "
-			<< "英语:" << scor->s_c[i].english << "   "
-			<< "c语言:" << scor->s_c[i].c_language << "   "
+			<< "班级:" << scor->s_c[i].clas << "\t"
+			<< "高数:" << scor->s_c[i].high_math << "\t"
+			<< "英语:" << scor->s_c[i].english << "\t"
+			<< "c语言:" << scor->s_c[i].c_language << "\t"
 			<< "总成绩" << scor->s_c[i].sum_score << "   "
-			<< "班排名" << scor->s_c[i].class_ranking << "   "
+			<< "班排名" << scor->s_c[i].class_ranking << "\t"
 			<< "校排名:" << scor->s_c[i].school_ranking << endl;
 	}
 
@@ -1368,12 +1439,13 @@ void look_the_bad_score_student(score *scor)
 	string clas = " ";
 	cout << "请输入班级：";
 	cin >> clas;
-
-	cout << "请选择课程：" << endl;
-	cout << "1.高数成绩" << endl;
-	cout << "2.英语成绩" << endl;
-	cout << "3.c语言成绩" << endl;
-
+	system("cls");
+	cout << "\t\t\t\t*---------------------*--------------------*" << endl;
+	cout << "\t\t\t\t|             请选择课程成绩：             |" << endl;
+	cout << "\t\t\t\t|               1.高数成绩                 |" << endl;
+	cout << "\t\t\t\t|               2.英语成绩                 |" << endl;
+	cout << "\t\t\t\t|               3.c语言成绩                |" << endl;
+	cout << "\t\t\t\t*---------------------*--------------------*" << endl;
 	int select = 0;
 	cin >> select;
 

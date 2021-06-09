@@ -3,6 +3,7 @@
 #include <string>
 #include <ctime>
 #include <fstream>
+#include <cctype>
 #define MAX 10000
 
 using namespace std;
@@ -50,3 +51,4 @@ void look_class_information2(information2* infor2);
 void look_class_score2(score2* scor2);
 void look_the_bad_score_student(score2* scor2);
 void look_the_bad_score(score2* scor2, int i, int score);
+int judje_score(int num);
